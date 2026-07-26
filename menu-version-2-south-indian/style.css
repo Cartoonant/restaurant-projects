@@ -1196,7 +1196,7 @@ body {
 #lunch .sec-title { font-size: clamp(2.2rem, 5vw, 3rem); }
 #lunch .sec-num   { font-size: 1rem; }
 /* ── Schedule banner: single horizontal row ── */
-rong { color: var(--gold-light); font-weight: 600; }
+.schedule-text strong { color: var(--gold-light); font-weight: 600; }
 .schedule-time { color: var(--gold-light); font-weight: 700; font-size: 1.05rem; letter-spacing: 0.04em; }
 .schedule-pipe { opacity: 0.4; margin: 0 0.1rem; }
 .schedule-icon-wrap { font-size: 1rem; opacity: 0.7; }
@@ -1287,6 +1287,8 @@ rong { color: var(--gold-light); font-weight: 600; }
   }
   .page-wrap {
     padding: 1.2cm 1.4cm !important;
+    padding-left: 1.4cm !important;
+    padding-right: 1.4cm !important;
     box-shadow: none !important;
     max-width: 100% !important;
   }
