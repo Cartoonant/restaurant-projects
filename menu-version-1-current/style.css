@@ -918,12 +918,6 @@ img { display: block; max-width: 100%; height: auto; }
     break-after: avoid !important;
     page-break-after: avoid !important;
   }
-  /* Spacer block at top of page 4 — ::before is reliable where padding-top is not */
-  #sides::before {
-    content: '' !important;
-    display: block !important;
-    height: 3.5rem !important;
-  }
 
   /* Desserts follows immediately on the same page as Sides */
   #desserts {
@@ -938,11 +932,12 @@ img { display: block; max-width: 100%; height: auto; }
     break-before: page !important;
     page-break-before: always !important;
   }
-  /* Spacer block at top of page 6 */
+  /* Spacer block at top of page 6 — 60px matches Appetizers page top gap */
   #drinks::before {
     content: '' !important;
     display: block !important;
-    height: 3.5rem !important;
+    height: 60px !important;
+    width: 100% !important;
   }
 
   /* ─────────────────────────────────────
@@ -1118,12 +1113,17 @@ img { display: block; max-width: 100%; height: auto; }
   #drinks .drink-grid,
   #drinks .drink-item  { break-inside: avoid !important; page-break-inside: avoid !important; }
 
-  /* Cocktails: page 9 — margin-top as spacer (sub-labels are inline-level, ::before unreliable) */
+  /* Cocktails: page 9 — ::before spacer on the sub-label itself */
   #drinks .sub-label:last-of-type {
     break-before: page !important;
     page-break-before: always !important;
-    margin-top: 3.5rem !important;
     display: block !important;
+  }
+  #drinks .sub-label:last-of-type::before {
+    content: '' !important;
+    display: block !important;
+    height: 60px !important;
+    width: 100% !important;
   }
   /* Target the cocktails sub-label specifically (it immediately precedes .drink-grid) */
   #drinks .drink-grid {
@@ -1134,11 +1134,12 @@ img { display: block; max-width: 100%; height: auto; }
   /* ─────────────────────────────────────
      7. MAIN DISHES — breathing room at page top (page 3)
   ───────────────────────────────────────*/
-  /* Spacer block at top of page 3 */
+  /* Spacer block at top of page 3 — 60px matches Appetizers page top gap */
   #mains::before {
     content: '' !important;
     display: block !important;
-    height: 3.5rem !important;
+    height: 60px !important;
+    width: 100% !important;
   }
   #mains .sec-head {
     margin-bottom: 1.6rem !important;
