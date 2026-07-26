@@ -1,0 +1,1268 @@
+/* �.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.�
+   THE BIRYANI CLUB �?" Version 2 / South Indian Dark Aesthetic
+   Palette:  Deep Charcoal bg · Terracotta · Warm Gold · Green
+   Fonts:    Cormorant Garamond (display) · Outfit (UI) · Inter
+   �.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.� */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+/* �"?�"? Design Tokens �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
+:root {
+  --tc:           #C65D3E;   /* terracotta */
+  --tc-deep:      #A14529;
+  --tc-light:     #E8926F;
+  --gold:         #C9A84C;
+  --gold-warm:    #DAB85D;
+  --gold-muted:   #B8973F;
+  --green-deep:   #1B4332;
+  --green:        #2D6A4F;
+  --green-light:  #40916C;
+  --green-muted:  #74C69D;
+
+  --bg:           #0F0E0C;
+  --bg-card:      #1A1814;
+  --bg-card-hov:  #221F1A;
+  --bg-surface:   #14120F;
+  --bg-elevated:  #252118;
+
+  --text:         #F5F0E8;
+  --text-sec:     #C4BAA8;
+  --text-muted:   #8A7E6E;
+  --text-de:      #9E9484;
+
+  --border:       rgba(201,168,76,0.12);
+  --border-acc:   rgba(201,168,76,0.25);
+
+  --ff-display:   'Cormorant Garamond', Georgia, serif;
+  --ff-ui:        'Outfit', 'Inter', sans-serif;
+  --ff-body:      'Inter', sans-serif;
+
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 12px;
+
+  --ease: 200ms cubic-bezier(0.4,0,0.2,1);
+  --ease-slow: 400ms cubic-bezier(0.4,0,0.2,1);
+
+  --pad-h: 1.6rem;
+}
+
+/* �"?�"? Reset �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { font-size:16px; scroll-behavior:smooth; -webkit-font-smoothing:antialiased; }
+
+body {
+  font-family: var(--ff-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse at 20% 0%,  rgba(198,93,62,0.05)  0%, transparent 55%),
+    radial-gradient(ellipse at 80% 100%, rgba(27,67,50,0.07)   0%, transparent 55%);
+}
+
+/* �"?�"? Top/Bottom accent bars �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
+.accent-bar,
+.accent-bar-bottom {
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--tc) 15%,
+    var(--gold) 35%,
+    var(--green-deep) 50%,
+    var(--gold) 65%,
+    var(--tc) 85%,
+    transparent 100%
+  );
+  opacity: 0.75;
+}
+
+/* �"?�"? Page wrapper �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
+.page-wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 var(--pad-h);
+}
+
+/* �.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.�
+   HEADER
+�.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.� */
+.site-header {
+  background: transparent;
+  padding: 3.2rem 0 0;
+  position: relative;
+  z-index: 10;
+  overflow: visible;
+  text-align: center;
+}
+
+.header-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 2.2rem;
+}
+
+/* Logo */
+.logo-wrap { flex-shrink: 0; }
+.logo-img {
+  height: 96px;
+  width: auto;
+  border-radius: 50%;
+  border: 2px solid rgba(201,168,76,0.4);
+  box-shadow: 0 0 0 6px rgba(201,168,76,0.07), 0 8px 28px rgba(0,0,0,0.45);
+}
+.logo-fallback {
+  display: none;
+  width: 96px; height: 96px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 2px solid var(--gold);
+  align-items: center;
+  justify-content: center;
+}
+.logo-emblem-inner {
+  font-family: var(--ff-display);
+  font-size: 1.1rem; font-weight:700;
+  color: var(--gold-warm);
+  letter-spacing: 0.06em;
+}
+
+/* Tagline above name */
+.brand-text { text-align: center; }
+.brand-name {
+  font-family: var(--ff-display);
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  color: #FFFFFF;
+  margin-bottom: 0.4rem;
+}
+.brand-sub {
+  font-family: var(--ff-ui);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* �"?�"? Legend bar �?" floating pill �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
+.legend-bar {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-acc);
+  border-radius: 50px;
+  padding: 0.72rem 1.5rem;
+  margin: 0;
+  position: relative;
+  bottom: -1.1rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,168,76,0.07) inset;
+  z-index: 20;
+}
+.legend-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem 0.7rem;
+  font-family: var(--ff-ui);
+  font-size: 0.67rem;
+  color: var(--text-muted);
+}
+.legend-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem 0.5rem;
+}
+.legend-label {
+  font-weight: 600;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.63rem;
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-sec);
+  white-space: nowrap;
+}
+.legend-sep { color: rgba(201,168,76,0.3); }
+.legend-divider {
+  width: 1px; height: 14px;
+  background: rgba(201,168,76,0.18);
+  margin: 0 0.4rem;
+}
+
+/* �"?�"? Dietary badges �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
+.bdg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px; height: 20px;
+  border-radius: var(--r-sm);
+  font-family: var(--ff-ui);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+.bdg-v  { background: rgba(45,106,79,0.25); color: var(--green-muted); border: 1px solid rgba(45,106,79,0.4); }
+.bdg-vg { background: rgba(64,145,108,0.2); color: var(--green-light); border: 1px solid rgba(64,145,108,0.35); }
+.bdg-a  { background: rgba(201,168,76,0.12); color: var(--gold-muted); border: 1px solid rgba(201,168,76,0.22); }
+
+.badges { display: flex; gap: 3px; flex-wrap: wrap; }
+
+/* �"?�"? Spice tag �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
+
+
+/* �.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.�
+   MAIN CONTENT
+�.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.� */
+.menu-main { padding-top: 3.2rem; }
+
+/* �"?�"? Section �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
+.menu-section {
+  padding: 2.8rem 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  animation: fadeInUp 0.6s ease-out both;
+}
+.menu-section:last-child { border-bottom: none; }
+
+.menu-section:nth-child(2) { animation-delay: 0.05s; }
+.menu-section:nth-child(3) { animation-delay: 0.10s; }
+.menu-section:nth-child(4) { animation-delay: 0.15s; }
+.menu-section:nth-child(5) { animation-delay: 0.20s; }
+.menu-section:nth-child(6) { animation-delay: 0.25s; }
+.menu-section:nth-child(7) { animation-delay: 0.30s; }
+
+@keyframes fadeInUp {
+  from { opacity:0; transform: translateY(14px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+/* Section heading */
+.sec-head {
+  text-align: center;
+  margin-bottom: 1.8rem;
+  padding: 1rem 0;
+  position: relative;
+}
+.sec-head::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 55%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-acc), transparent);
+}
+.sec-head::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 35%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-acc), transparent);
+}
+.sec-num {
+  font-family: var(--ff-display);
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: var(--tc);
+  opacity: 0.6;
+  letter-spacing: 0.18em;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.sec-title {
+  font-family: var(--ff-display);
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+}
+.sec-title-de {
+  font-weight: 400;
+  color: var(--text-muted);
+  font-size: 0.78em;
+  font-style: italic;
+}
+.sec-rule { display: none; } /* replaced by pseudo-element borders */
+.sec-sub {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: var(--text-muted);
+  font-style: italic;
+  letter-spacing: 0.1em;
+  margin-top: 0.3rem;
+  text-align: center;
+}
+.sec-note {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: 1.2rem;
+  padding: 0.5rem 1rem;
+  background: rgba(201,168,76,0.04);
+  border-radius: var(--r-md);
+  border: 1px dashed var(--border);
+}
+
+/* �"?�"? Sub labels �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
+.sub-label {
+  font-family: var(--ff-ui);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--tc-light);
+  margin: 1.8rem 0 0.9rem;
+  padding: 0.4rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.sub-label::before {
+  content: '';
+  width: 20px; height: 1px;
+  background: var(--tc);
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+.sub-label em { font-weight: 400; color: var(--text-muted); font-size: 0.68rem; }
+
+/* �"?�"? Dish rows (regular) �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
+.dish-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+@media (max-width: 560px) { .dish-grid { grid-template-columns: 1fr; } }
+
+.dish-row {
+  padding: 0.85rem 0.9rem;
+  border-radius: var(--r-md);
+  border: 1px solid transparent;
+  margin-bottom: 2px;
+  transition: background var(--ease-slow), border-color var(--ease-slow), transform var(--ease);
+  border-bottom: 1px solid var(--border);
+}
+.dish-row:hover {
+  background: var(--bg-card-hov);
+  border-color: var(--border);
+  transform: translateX(3px);
+}
+
+.dish-top {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin-bottom: 0.3rem;
+}
+.dish-name {
+  font-family: var(--ff-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+.dish-note {
+  font-family: var(--ff-body);
+  font-size: 0.68rem;
+  font-weight: 300;
+  color: var(--text-muted);
+  font-style: italic;
+}
+.dish-dots {
+  flex: 1;
+  border-bottom: 1px dashed rgba(201,168,76,0.2);
+  margin: 0 0.4rem;
+  position: relative;
+  top: -4px;
+  min-width: 20px;
+}
+.dish-price {
+  font-family: var(--ff-ui);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gold);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+.dish-en {
+  font-size: 0.8rem;
+  color: var(--text-sec);
+  line-height: 1.5;
+  margin-bottom: 0.15rem;
+  font-weight: 300;
+}
+.dish-de {
+  font-size: 0.73rem;
+  color: var(--text-de);
+  font-style: italic;
+  line-height: 1.45;
+  margin-bottom: 0.45rem;
+  font-weight: 300;
+}
+.dish-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.3rem;
+}
+
+/* �.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.�
+   HERO DISH ROWS (with photo)
+�.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.� */
+.dish-hero {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+  background: var(--bg-card);
+  border: 1px solid var(--border-acc);
+  border-radius: var(--r-lg);
+  padding: 1.2rem;
+  margin: 1rem 0 1.2rem;
+  transition: background var(--ease-slow), border-color var(--ease-slow);
+  overflow: hidden;
+  position: relative;
+}
+.dish-hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--tc), var(--gold), var(--green));
+  opacity: 0.55;
+}
+.dish-hero:hover {
+  background: var(--bg-card-hov);
+  border-color: rgba(201,168,76,0.4);
+  transform: none;
+}
+
+.dish-hero .dish-info { flex: 1; min-width: 0; }
+.dish-hero .dish-name { color: var(--text); font-size: 1.12rem; }
+.dish-hero .dish-price { color: var(--gold); }
+
+.dish-photo-wrap { flex-shrink: 0; width: 130px; }
+.dish-photo {
+  width: 130px; height: 100px;
+  object-fit: cover;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border-acc);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+}
+
+/* Photo placeholder */
+.photo-placeholder {
+  width: 130px; height: 100px;
+  border-radius: var(--r-md);
+  border: 2px dashed rgba(201,168,76,0.4);
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(201,168,76,0.04),
+    rgba(201,168,76,0.04) 6px,
+    transparent 6px,
+    transparent 14px
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  padding: 0.5rem;
+  text-align: center;
+  flex-shrink: 0;
+}
+.photo-placeholder-icon { font-size: 1.2rem; opacity: 0.6; }
+.photo-placeholder-label {
+  font-family: var(--ff-ui);
+  font-size: 0.56rem;
+  font-weight: 700;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+}
+.photo-placeholder-file {
+  font-family: monospace;
+  font-size: 0.48rem;
+  color: var(--text-muted);
+  word-break: break-all;
+  line-height: 1.3;
+}
+
+.logo-placeholder {
+  width: 96px; height: 96px;
+  border-radius: 50%;
+  border: 2px dashed rgba(201,168,76,0.45);
+  background: rgba(201,168,76,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  text-align: center;
+  padding: 0.5rem;
+}
+.logo-placeholder-icon { font-size: 1.2rem; }
+.logo-placeholder-label {
+  font-family: var(--ff-ui);
+  font-size: 0.44rem;
+  font-weight: 700;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  line-height: 1.3;
+}
+
+.dish-hero-reverse { flex-direction: row-reverse; }
+
+/* Hero tag */
+.hero-tag {
+  font-family: var(--ff-ui);
+  font-size: 0.56rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--tc-light);
+  background: rgba(198,93,62,0.14);
+  border: 1px solid rgba(198,93,62,0.3);
+  border-radius: 20px;
+  padding: 1px 7px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+/* �.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.�
+   LUNCH SECTION
+�.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.� */
+.lunch-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-acc);
+  border-radius: var(--r-lg);
+  padding: 1.4rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.lunch-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--tc), var(--gold), var(--green));
+  opacity: 0.55;
+}
+.lunch-section .sec-head { margin-bottom: 1rem; }
+
+/* Schedule banner */
+
+.schedule-icon { font-size: 1rem; }
+
+.schedule-de { color: var(--text-muted); font-size: 0.74rem; font-style: italic; }
+.schedule-text strong { color: var(--gold); font-weight: 600; }
+
+/* Lunch cards */
+.lunch-card {
+  background: var(--bg-elevated) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--r-md);
+  padding: 0.8rem !important;
+}
+.lunch-price { color: var(--green-light) !important; font-size: 1.05rem !important; }
+
+/* �.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.�
+   BIRYANI SECTION
+�.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.� */
+.biryani-section {}
+
+/* �.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.�
+   SIDES & BREADS �?" 2-COLUMN
+�.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.� */
+.sides-columns {
+  display: flex;
+  gap: 0;
+  align-items: flex-start;
+}
+.sides-col { flex: 1; min-width: 0; padding: 0 1rem; }
+.sides-col:first-child { padding-left: 0; }
+.sides-col:last-child  { padding-right: 0; }
+
+.sides-col-head {
+  font-family: var(--ff-ui);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+.sides-col-head em { font-weight: 400; color: var(--text-muted); letter-spacing: 0.1em; }
+
+.sides-divider {
+  width: 1px;
+  background: var(--border);
+  align-self: stretch;
+  flex-shrink: 0;
+}
+
+@media (max-width: 560px) {
+  .sides-columns { flex-direction: column; gap: 0; }
+  .sides-divider { width: 100%; height: 1px; margin: 0.8rem 0; }
+  .sides-col { padding: 0; }
+}
+
+/* �.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.�
+   KULFI SECTION WITH PHOTO
+�.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.� */
+.kulfi-section-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+}
+.kulfi-section-content { flex: 1; min-width: 0; }
+.kulfi-hero-img {
+  width: 140px; height: 140px;
+  object-fit: cover;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border-acc);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+  flex-shrink: 0;
+}
+
+.kulfi-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
+  flex-wrap: wrap;
+}
+.kulfi-header-title {
+  font-family: var(--ff-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.kulfi-header-sub {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+.kulfi-header-price {
+  margin-left: auto;
+  font-family: var(--ff-ui);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.02em;
+}
+
+.kulfi-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+@media (max-width: 600px) { .kulfi-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 380px) { .kulfi-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 500px) {
+  .kulfi-section-wrap { flex-direction: column; }
+  .kulfi-hero-img { width: 100%; height: 140px; }
+}
+
+.kulfi-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--tc);
+  border-radius: var(--r-md);
+  padding: 1rem 0.6rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  text-align: center;
+  transition: transform var(--ease), box-shadow var(--ease);
+}
+.kulfi-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(198,93,62,0.12);
+  border-color: rgba(201,168,76,0.3);
+}
+.kulfi-flavor {
+  font-family: var(--ff-display);
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+.kulfi-sub {
+  font-size: 0.56rem;
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+/* �.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.�
+   FOOTER
+�.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.� */
+.site-footer {
+  background: transparent;
+  padding: 2.4rem 0 1.8rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+.footer-inner { margin-bottom: 0.8rem; }
+.footer-line {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.7;
+  margin-bottom: 0.15rem;
+}
+.footer-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem 0.5rem;
+  font-family: var(--ff-ui);
+  font-size: 0.66rem;
+  color: var(--text-muted);
+  margin: 0.8rem 0;
+}
+.footer-lbl { color: var(--gold); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+.footer-spice-item { color: var(--text-sec); }
+.footer-dot { color: rgba(201,168,76,0.3); }
+.footer-brand {
+  font-family: var(--ff-display);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--gold);
+  letter-spacing: 0.18em;
+  opacity: 0.55;
+  margin-top: 0.8rem;
+}
+
+/* ------------------------------
+   LUNCH SUB-LABELS - V2 DARK
+------------------------------ */
+.lunch-sub-label {
+  font-family: var(--ff-ui);
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--tc-light);
+  margin: 1rem 0 0.55rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(198,93,62,0.2);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.lunch-sub-label::before {
+  content: '';
+  width: 16px; height: 1px;
+  background: var(--tc);
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+/* ------------------------------
+   THAALI GRID - V2 DARK
+------------------------------ */
+.thaali-note {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: 0.8rem;
+  text-align: center;
+}
+.thaali-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.7rem;
+  margin-top: 0.5rem;
+}
+.thaali-column {
+  background: var(--bg-card);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border-acc);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.thaali-column::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--tc), var(--gold), var(--green));
+  opacity: 0.5;
+  z-index: 1;
+}
+.thaali-col-photo {
+  position: relative;
+  height: 100px;
+  flex-shrink: 0;
+}
+.thaali-col-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.88);
+}
+.thaali-photo-placeholder {
+  width: 100%; height: 100%;
+  background: var(--bg-elevated);
+  border-bottom: 2px dashed rgba(201,168,76,0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  font-size: 1.4rem;
+  color: var(--text-muted);
+}
+.thaali-photo-placeholder small {
+  font-size: 0.46rem;
+  font-family: monospace;
+  color: var(--text-muted);
+}
+.thaali-col-badge {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 0.28rem 0.6rem;
+  font-family: var(--ff-ui);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.thaali-badge-vg {
+  background: linear-gradient(transparent, rgba(27,67,50,0.88));
+  color: var(--green-muted);
+}
+.thaali-badge-v {
+  background: linear-gradient(transparent, rgba(27,67,50,0.82));
+  color: var(--green-light);
+}
+.thaali-badge-nv {
+  background: linear-gradient(transparent, rgba(160,69,41,0.82));
+  color: var(--tc-light);
+}
+
+.thaali-items { padding: 0.5rem 0.6rem 0.6rem; flex: 1; }
+.thaali-item {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.thaali-item:last-child { border-bottom: none; }
+.thaali-item-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.3rem;
+  margin-bottom: 0.25rem;
+}
+.thaali-item-name {
+  font-family: var(--ff-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.2;
+}
+.thaali-item-price {
+  font-family: var(--ff-ui);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--gold);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.thaali-includes {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.thaali-includes li {
+  font-size: 0.67rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  padding-left: 0.7rem;
+  position: relative;
+}
+.thaali-includes li::before {
+  content: '\2022';
+  position: absolute;
+  left: 0;
+  color: var(--gold-muted);
+}
+.thaali-includes em { font-style: italic; color: var(--text-de); }
+
+@media (max-width: 600px) {
+  .thaali-grid { grid-template-columns: 1fr; }
+}
+
+/* ------------------------------
+   KULFI FLAVOR CARDS - V2 DARK
+------------------------------ */
+.price-unit {
+  font-size: 0.62rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-left: 0.2rem;
+}
+.kulfi-flavor-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+}
+@media (max-width: 600px) { .kulfi-flavor-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.kulfi-flavor-card {
+  border-radius: var(--r-md);
+  padding: 0.9rem 0.4rem 0.75rem;
+  text-align: center;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-top: 3px solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+.kulfi-flavor-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.35);
+  border-color: var(--border-acc);
+}
+.kulfi-mango   { border-top-color: #F4A528; }
+.kulfi-classic { border-top-color: #C9A84C; }
+.kulfi-litchi  { border-top-color: #E8667A; }
+.kulfi-vanilla { border-top-color: #B5936E; }
+.kulfi-guava   { border-top-color: #6AAB6E; }
+
+.kulfi-flavor-name {
+  font-family: var(--ff-display);
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.2;
+}
+.kulfi-flavor-note {
+  font-size: 0.5rem;
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+#dish-matka .dish-info { min-width: 0; }
+#dish-matka .dish-photo-wrap { align-self: flex-start; }
+
+/* -- THAALI CATEGORY LABEL -- */
+.thaali-col-category {
+  font-family: var(--ff-ui);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.28rem 0.7rem;
+  text-align: center;
+}
+.thaali-cat-vg { background: rgba(27,67,50,0.45); color: var(--green-muted); border-bottom: 1px solid rgba(45,106,79,0.3); }
+.thaali-cat-v  { background: rgba(27,67,50,0.35); color: var(--green-light); border-bottom: 1px solid rgba(64,145,108,0.3); }
+.thaali-cat-nv { background: rgba(160,69,41,0.35); color: var(--tc-light);  border-bottom: 1px solid rgba(198,93,62,0.3); }
+
+/* -- THAALI MILK NOTE -- */
+.thaali-milk-note {
+  font-size: 0.61rem !important;
+  color: var(--text-de) !important;
+  font-style: italic !important;
+}
+
+/* -- STREET SUBLABEL inside Appetizers -- */
+.street-sublabel {
+  color: var(--tc-light) !important;
+  opacity: 0.8;
+  font-size: 0.63rem !important;
+}
+
+/* -- KULFI FLAVOR CARDS - 50% more compact -- */
+.kulfi-flavor-card {
+  padding: 0.38rem 0.3rem 0.32rem !important;
+  gap: 0.12rem !important;
+}
+.kulfi-flavor-name { font-size: 0.84rem !important; }
+.kulfi-flavor-note { font-size: 0.44rem !important; }
+
+/* -- DISH MILK LINE -- */
+.dish-milk {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 0.15rem;
+  margin-bottom: 0.2rem;
+}
+
+/* -- LUNCH ONE-PAGE: compact overrides -- */
+.lunch-section .thaali-col-photo { height: 72px; }
+.lunch-section .thaali-item { padding: 0.38rem 0; }
+.lunch-section .thaali-includes li { font-size: 0.63rem; line-height: 1.35; }
+.lunch-section .thaali-note { margin-bottom: 0.5rem; font-size: 0.67rem; }
+.lunch-section .dish-grid { gap: 0; }
+.lunch-section .lunch-card { padding: 0.55rem 0.6rem !important; }
+.lunch-section 
+
+/* -- KULFI CARDS - tight to content, no equal-height stretch -- */
+.kulfi-flavor-grid {
+  align-items: start !important;
+}
+.kulfi-flavor-card {
+  padding: 0.28rem 0.35rem 0.22rem !important;
+  gap: 0.1rem !important;
+  align-self: start !important;
+}
+.kulfi-flavor-name { font-size: 0.78rem !important; line-height: 1.15 !important; }
+.kulfi-flavor-note { font-size: 0.42rem !important; line-height: 1.3 !important; }
+.kulfi-flavor-card .badges { margin-top: 0.1rem; }
+.kulfi-flavor-card .bdg { width: 17px !important; height: 17px !important; font-size: 0.55rem !important; }
+
+/* --------------------------------
+   DRINKS MENU - Version 2 Styles
+-------------------------------- */
+.drinks-nav-link {
+  font-family: var(--ff-ui);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 150ms;
+}
+.drinks-nav-link:hover { color: var(--tc-light); }
+
+.drink-item-list { display: flex; flex-direction: column; }
+
+.drink-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  padding: 0.42rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.drink-item:last-child { border-bottom: none; }
+.drink-name {
+  font-family: var(--ff-display);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text);
+  flex: 1;
+  line-height: 1.3;
+}
+.drink-price {
+  font-family: var(--ff-ui);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--gold);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.drink-item-featured .drink-name {
+  font-weight: 700;
+  font-size: 1.08rem;
+  color: var(--text);
+}
+.drink-item-special .drink-price { color: var(--tc-light); }
+.drink-item-special .drink-name  { font-style: italic; }
+
+.drink-milk-note {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 0.7rem;
+  padding: 0.35rem 0.6rem;
+  border-left: 2px solid var(--gold-muted);
+  background: rgba(201,168,76,0.07);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+}
+.drink-sub-desc {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 0.6rem;
+}
+
+/* 2-col grid for Beers / Cocktails */
+.drink-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1.5rem;
+}
+.drink-grid .drink-item { border-bottom: 1px solid var(--border); }
+@media (max-width: 560px) { .drink-grid { grid-template-columns: 1fr; } }
+
+/* Two-column layout for Soft Drinks / Spirits */
+.drinks-columns {
+  display: grid;
+  grid-template-columns: 1fr 2px 1fr;
+  gap: 0 1.2rem;
+  margin-top: 0.5rem;
+}
+.drinks-col-divider { background: var(--border-acc); width: 1px; margin: 0 auto; opacity: 0.4; }
+.drinks-col-head {
+  font-family: var(--ff-ui);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--tc-light);
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid rgba(198,93,62,0.2);
+  margin-bottom: 0.55rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.drink-col-price {
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0;
+  font-size: 0.75rem;
+}
+
+/* Variety tag cloud */
+.drink-varieties {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.2rem;
+}
+.drink-tag {
+  font-family: var(--ff-ui);
+  font-size: 0.64rem;
+  color: var(--text);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 0.2rem 0.6rem;
+  letter-spacing: 0.02em;
+  transition: border-color 150ms, background 150ms;
+}
+.drink-tag:hover { border-color: var(--border-acc); background: var(--bg-card); }
+
+@media (max-width: 600px) {
+  .drinks-columns { grid-template-columns: 1fr; }
+  .drinks-col-divider { display: none; }
+}
+
+
+
+/* ── Lunch schedule banner ── */
+
+
+
+.schedule-text strong { color: var(--gold-warm); font-weight: 600; }
+
+
+/* Lunch section heading — bigger */
+#lunch .sec-title { font-size: clamp(2.2rem, 5vw, 3rem); }
+#lunch .sec-num   { font-size: 1rem; }
+/* ── Schedule banner: single horizontal row ── */
+rong { color: var(--gold-light); font-weight: 600; }
+.schedule-time { color: var(--gold-light); font-weight: 700; font-size: 1.05rem; letter-spacing: 0.04em; }
+.schedule-pipe { opacity: 0.4; margin: 0 0.1rem; }
+.schedule-icon-wrap { font-size: 1rem; opacity: 0.7; }
+/* Remove old 2-row layout classes */
+.schedule-text { display: contents; }
+.schedule-time-block { display: contents; }
+/* ── Schedule availability banner ── */
+.schedule-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: linear-gradient(135deg, #1E1A16 0%, #2E2924 100%);
+  border: 1px solid rgba(184,137,42,0.3);
+  border-left: 4px solid var(--tc);
+  border-radius: var(--r-md);
+  padding: 1rem 1.8rem;
+  margin: 1rem 0 1.4rem;
+  flex-wrap: wrap;
+}
+.schedule-icon-wrap {
+  font-size: 1.1rem;
+  opacity: 0.75;
+  flex-shrink: 0;
+}
+.schedule-banner > span,
+.schedule-banner > strong { color: rgba(255,255,255,0.85); font-size: 0.93rem; }
+.schedule-banner strong,
+.schedule-banner .schedule-time { color: var(--gold-light); font-weight: 700; }
+.schedule-time { font-size: 1.1rem; letter-spacing: 0.05em; color: var(--gold-light) !important; }
+.schedule-pipe { opacity: 0.4; color: rgba(255,255,255,0.6) !important; }
+
+
+
+   /* vivid green  — Mild        */
+   /* amber orange — Medium      */
+   /* red          — Spicy       */
+   /* dark crimson — Extra Spicy */
+
+/* ── Spice pepper indicators ─────────────────────────────────────────────── */
+.spice-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  vertical-align: middle;
+  line-height: 1;
+}
+.sp {
+  display: inline-block;
+  font-style: normal;
+  font-size: 0.82em;
+  line-height: 1;
+  will-change: filter;   /* own GPU layer — consistent filter output */
+}
+/* Grayscale → sepia → hue: fully replaces emoji color, background-independent */
+.sp-g  { filter: grayscale(1) brightness(0.55) sepia(1) hue-rotate(82deg)  saturate(8);  }
+.sp-y  { filter: grayscale(1) brightness(0.55) sepia(1) hue-rotate(25deg)  saturate(6);  }
+.sp-r  { filter: grayscale(1) brightness(0.45) sepia(1) hue-rotate(-12deg) saturate(9);  }
+.sp-rr { filter: grayscale(1) brightness(0.32) sepia(1) hue-rotate(-22deg) saturate(12); }
+
+/* KEY FIX: give menu-item spice tags the same dark context as the legend bar
+   so the CSS filter sees the same background and produces identical colors. */
+.dish-meta .spice-tag,
+.thaali-item .spice-tag {
+  background: #3A3530;
+  border-radius: 4px;
+  padding: 2px 5px;
+  margin-right: 2px;
+}

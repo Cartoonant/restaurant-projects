@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cocktail Recipes — Restaurant Edition</title>
+  <meta name="description" content="Premium cocktail recipe book with detailed ingredients, quantities, and step-by-step instructions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c9a96e;
+      --gold-light: #e8d5a8;
+      --gold-dark: #a07d3f;
+      --bg-dark: #0f0f0f;
+      --bg-card: #1a1a1a;
+      --bg-card-alt: #151515;
+      --text-primary: #f0ece4;
+      --text-secondary: #a09b90;
+      --text-muted: #6b6660;
+      --border: #2a2723;
+      --accent-coral: #d4856a;
+      --accent-green: #7ea87e;
+      --accent-blue: #6a9fd4;
+      --accent-pink: #d46a9f;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ——— COVER PAGE ——— */
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem 2rem;
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(ellipse at 30% 20%, rgba(201,169,110,0.08) 0%, transparent 50%),
+                  radial-gradient(ellipse at 70% 80%, rgba(201,169,110,0.05) 0%, transparent 50%),
+                  var(--bg-dark);
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px;
+      height: 500px;
+      border: 1px solid rgba(201,169,110,0.08);
+      border-radius: 50%;
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      height: 700px;
+      border: 1px solid rgba(201,169,110,0.04);
+      border-radius: 50%;
+    }
+
+    .cover-ornament {
+      font-size: 2rem;
+      color: var(--gold);
+      letter-spacing: 1rem;
+      margin-bottom: 2rem;
+      opacity: 0.6;
+    }
+
+    .cover h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cover h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text-secondary);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cover-line {
+      width: 120px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cover-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ——— MAIN CONTAINER ——— */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+    }
+
+    /* ——— SECTION DIVIDERS ——— */
+    .section-header {
+      text-align: center;
+      padding: 1.5rem 0 1rem;
+      position: relative;
+    }
+
+    .section-header::before {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 0.8rem;
+    }
+
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .section-header p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* ——— RECIPE CARDS ——— */
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.7rem;
+    }
+
+    .recipe-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 0.8rem 1rem;
+      position: relative;
+      transition: border-color 0.3s ease;
+      page-break-inside: avoid;
+    }
+
+    .recipe-card:hover {
+      border-color: rgba(201,169,110,0.3);
+    }
+
+    .recipe-number {
+      position: absolute;
+      top: 0.6rem;
+      right: 0.8rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: rgba(201,169,110,0.08);
+      line-height: 1;
+    }
+
+    .recipe-header {
+      margin-bottom: 0.5rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .recipe-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.1rem;
+    }
+
+    .recipe-meta {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-top: 0.25rem;
+    }
+
+    .recipe-tag {
+      font-size: 0.6rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      background: rgba(201,169,110,0.08);
+      color: var(--gold);
+      border: 1px solid rgba(201,169,110,0.15);
+    }
+
+    .recipe-tag.mocktail {
+      background: rgba(126,168,126,0.1);
+      color: var(--accent-green);
+      border-color: rgba(126,168,126,0.2);
+    }
+
+    .recipe-tag.beer {
+      background: rgba(212,133,106,0.1);
+      color: var(--accent-coral);
+      border-color: rgba(212,133,106,0.2);
+    }
+
+    .recipe-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .recipe-ingredients h3,
+    .recipe-instructions h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+
+    .recipe-ingredients ul {
+      list-style: none;
+    }
+
+    .recipe-ingredients li {
+      font-size: 0.75rem;
+      color: var(--text-primary);
+      padding: 0.1rem 0;
+      border-bottom: 1px dotted rgba(201,169,110,0.1);
+      display: flex;
+      justify-content: space-between;
+      gap: 0.4rem;
+    }
+
+    .recipe-ingredients li:last-child {
+      border-bottom: none;
+    }
+
+    .ingredient-name {
+      color: var(--text-secondary);
+    }
+
+    .ingredient-qty {
+      color: var(--gold-light);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .recipe-instructions ol {
+      list-style: none;
+      counter-reset: step;
+    }
+
+    .recipe-instructions li {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      padding: 0.1rem 0 0.1rem 1.3rem;
+      position: relative;
+      line-height: 1.35;
+      counter-increment: step;
+    }
+
+    .recipe-instructions li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0.1rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--gold-dark);
+      opacity: 0.6;
+      width: 0.9rem;
+      text-align: center;
+    }
+
+    .recipe-glass {
+      font-size: 0.62rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 0.3rem;
+      padding-top: 0.25rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .recipe-glass strong {
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* ——— FOOTER ——— */
+    .footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+
+    .footer p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+    }
+
+    .footer .footer-ornament {
+      color: var(--gold);
+      opacity: 0.4;
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      letter-spacing: 0.5rem;
+    }
+
+    /* ——— RESPONSIVE ——— */
+    @media (max-width: 700px) {
+      .recipe-grid {
+        grid-template-columns: 1fr;
+      }
+      .recipe-card {
+        padding: 1rem;
+      }
+    }
+
+    /* ——— PRINT STYLES ——— */
+    @media print {
+      body {
+        background: #fff;
+        color: #1a1a1a;
+        font-size: 9pt;
+      }
+
+      .cover {
+        min-height: auto;
+        padding: 2rem 2rem;
+        background: none;
+        page-break-after: always;
+      }
+
+      .cover::before, .cover::after { display: none; }
+
+      .cover h1 {
+        color: #2a2520;
+        font-size: 2.5rem;
+      }
+
+      .cover h2 {
+        color: #6b6660;
+      }
+
+      .cover-line {
+        background: #c9a96e;
+      }
+
+      .recipe-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.6rem;
+      }
+
+      .recipe-card {
+        background: #fff;
+        border: 1px solid #ddd;
+        page-break-inside: avoid;
+        padding: 0.8rem 1rem;
+        margin-bottom: 0;
+      }
+
+      .recipe-name { color: #2a2520; }
+      .recipe-number { color: rgba(0,0,0,0.06); }
+      .ingredient-qty { color: #5a4a30; }
+      .recipe-tag { border: 1px solid #ccc; background: #f5f3ef; color: #5a4a30; }
+      .recipe-tag.mocktail { background: #eef5ee; color: #3a6a3a; border-color: #c0d8c0; }
+      .recipe-tag.beer { background: #f9f0ec; color: #8a5a42; border-color: #dfc8bb; }
+      .section-header h2 { color: #2a2520; }
+      .recipe-ingredients li { border-bottom-color: #e0ddd8; }
+      .recipe-instructions li::before { color: #8a7a5a; }
+
+      .footer { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ——— COVER ——— -->
+  <div class="cover">
+    <div class="cover-ornament">✦ ✦ ✦</div>
+    <h1>Cocktails</h1>
+    <h2>Recipe Book</h2>
+    <div class="cover-line"></div>
+  </div>
+
+  <!-- ——— RECIPES ——— -->
+  <div class="container">
+
+    <!-- ═══ ALCOHOLIC COCKTAILS ═══ -->
+    <div class="section-header">
+      <h2>Cocktails</h2>
+      <p>Classic &amp; signature serves</p>
+    </div>
+
+    <div class="recipe-grid">
+
+      <!-- 01 — Aperol Spritz -->
+      <article class="recipe-card" id="aperol-spritz">
+        <span class="recipe-number">01</span>
+        <div class="recipe-header">
+          <h2 class="recipe-name">Aperol Spritz</h2>
+          <div class="recipe-meta">
+            <span class="recipe-tag">Spritz</span>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <div class="recipe-ingredients">
+            <h3>Ingredients</h3>
+            <ul>
+              <li><span class="ingredient-name">Ice cubes</span><span class="ingredient-qty">to fill</span></li>
+              <li><span class="ingredient-name">Soda water</span><span class="ingredient-qty">30 ml</span></li>
+              <li><span class="ingredient-name">Orange wedge</span><span class="ingredient-qty">1</span></li>
+              <li><span class="ingredient-name">Aperol</span><span class="ingredient-qty">60 ml</span></li>
+              <li><span class="ingredient-name">Prosecco</span><span class="ingredient-qty">90 ml</span></li>
+            </ul>
+          </div>
+          <div class="recipe-instructions">
+            <h3>Instructions</h3>
+            <ol>
+              <li>Fill a large wine glass with ice cubes.</li>
+              <li>Add a splash of soda water.</li>
+              <li>Pour in the Aperol.</li>
+              <li>Top with Prosecco.</li>
+              <li>Gently stir to combine.</li>
+              <li>Garnish with an orange wedge.</li>
+            </ol>
+            <p class="recipe-glass"><strong>Glass:</strong> Large wine glass / Spritz glass</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 02 — Cosmopolitan -->
+      <article class="recipe-card" id="cosmopolitan">
+        <span class="recipe-number">02</span>
+        <div class="recipe-header">
+          <h2 class="recipe-name">Cosmopolitan</h2>
+          <div class="recipe-meta">
+            <span class="recipe-tag">Shaken</span>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <div class="recipe-ingredients">
+            <h3>Ingredients</h3>
+            <ul>
+              <li><span class="ingredient-name">Fresh lime juice</span><span class="ingredient-qty">15 ml</span></li>
+              <li><span class="ingredient-name">Cranberry juice</span><span class="ingredient-qty">30 ml</span></li>
+              <li><span class="ingredient-name">Orange wedge</span><span class="ingredient-qty">1</span></li>
+              <li><span class="ingredient-name">Vodka</span><span class="ingredient-qty">40 ml</span></li>
+            </ul>
+          </div>
+          <div class="recipe-instructions">
+            <h3>Instructions</h3>
+            <ol>
+              <li>Add lime juice, cranberry juice, and vodka into a shaker with ice.</li>
+              <li>Shake vigorously for 10–15 seconds until well chilled.</li>
+              <li>Double strain into a chilled martini glass.</li>
+              <li>Garnish with an orange wedge.</li>
+            </ol>
+            <p class="recipe-glass"><strong>Glass:</strong> Martini glass</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 03 — Cuba Libre -->
+      <article class="recipe-card" id="cuba-libre">
+        <span class="recipe-number">03</span>
+        <div class="recipe-header">
+          <h2 class="recipe-name">Cuba Libre</h2>
+          <div class="recipe-meta">
+            <span class="recipe-tag">Built</span>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <div class="recipe-ingredients">
+            <h3>Ingredients</h3>
+            <ul>
+              <li><span class="ingredient-name">Ice cubes</span><span class="ingredient-qty">to fill</span></li>
+              <li><span class="ingredient-name">Fresh lime juice</span><span class="ingredient-qty">20 ml</span></li>
+              <li><span class="ingredient-name">Cola</span><span class="ingredient-qty">120 ml</span></li>
+              <li><span class="ingredient-name">Lime wedge</span><span class="ingredient-qty">1</span></li>
+              <li><span class="ingredient-name">White rum</span><span class="ingredient-qty">50 ml</span></li>
+            </ul>
+          </div>
+          <div class="recipe-instructions">
+            <h3>Instructions</h3>
+            <ol>
+              <li>Fill a highball glass with ice cubes.</li>
+              <li>Squeeze the lime juice directly into the glass.</li>
+              <li>Pour in the white rum.</li>
+              <li>Top with cola and stir gently.</li>
+              <li>Garnish with a lime wedge on the rim.</li>
+            </ol>
+            <p class="recipe-glass"><strong>Glass:</strong> Highball glass</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 04 — Gin Basil Smash -->
+      <article class="recipe-card" id="gin-basil-smash">
+        <span class="recipe-number">04</span>
+        <div class="recipe-header">
+          <h2 class="recipe-name">Gin Basil Smash</h2>
+          <div class="recipe-meta">
+            <span class="recipe-tag">Shaken</span>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <div class="recipe-ingredients">
+            <h3>Ingredients</h3>
+            <ul>
+              <li><span class="ingredient-name">Fresh basil leaves</span><span class="ingredient-qty">8–10</span></li>
+              <li><span class="ingredient-name">Fresh lemon juice</span><span class="ingredient-qty">20 ml</span></li>
+              <li><span class="ingredient-name">Simple syrup</span><span class="ingredient-qty">20 ml</span></li>
+              <li><span class="ingredient-name">Gin</span><span class="ingredient-qty">60 ml</span></li>
+            </ul>
+          </div>
+          <div class="recipe-instructions">
+            <h3>Instructions</h3>
+            <ol>
+              <li>Muddle the basil leaves gently in the shaker.</li>
+              <li>Add lemon juice and simple syrup.</li>
+              <li>Pour in the gin.</li>
+              <li>Fill with ice and shake vigorously for 10–15 seconds.</li>
+              <li>Double strain into an old-fashioned glass filled with ice.</li>
+              <li>Garnish with a fresh basil sprig.</li>
+            </ol>
+            <p class="recipe-glass"><strong>Glass:</strong> Old-fashioned / Rocks glass</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 05 — Limoncello Spritz -->
+      <article class="recipe-card" id="limoncello-spritz">
+        <span class="recipe-number">05</span>
+        <div class="recipe-header">
+          <h2 class="recipe-name">Limoncello Spritz</h2>
+          <div class="recipe-meta">
+            <span class="recipe-tag">Spritz</span>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <div class="recipe-ingredients">
+            <h3>Ingredients</h3>
+            <ul>
+              <li><span class="ingredient-name">Ice cubes</span><span class="ingredient-qty">to fill</span></li>
+              <li><span class="ingredient-name">Soda water</span><span class="ingredient-qty">30 ml</span></li>
+              <li><span class="ingredient-name">Lemon slice</span><span class="ingredient-qty">1</span></li>
+              <li><span class="ingredient-name">Fresh mint sprig</span><span class="ingredient-qty">1</span></li>
+              <li><span class="ingredient-name">Limoncello</span><span class="ingredient-qty">60 ml</span></li>
+              <li><span class="ingredient-name">Prosecco</span><span class="ingredient-qty">90 ml</span></li>
+            </ul>
+          </div>
+          <div class="recipe-instructions">
+            <h3>Instructions</h3>
+            <ol>
+              <li>Fill a large wine glass with ice cubes.</li>
+              <li>Add a splash of soda water.</li>
+              <li>Pour in the Limoncello.</li>
+              <li>Top with Prosecco.</li>
+              <li>Stir gently to combine.</li>
+              <li>Garnish with a lemon slice and mint sprig.</li>
+            </ol>
+            <p class="recipe-glass"><strong>Glass:</strong> Large wine glass / Spritz glass</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 06 — Long Island Iced Tea -->
+      <article class="recipe-card" id="long-island-iced-tea">
+        <span class="recipe-number">06</span>
+        <div class="recipe-header">
+          <h2 class="recipe-name">Long Island Iced Tea</h2>
+          <div class="recipe-meta">
+            <span class="recipe-tag">Built</span>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <div class="recipe-ingredients">
+            <h3>Ingredients</h3>
+            <ul>
+              <li><span class="ingredient-name">Ice cubes</span><span class="ingredient-qty">to fill</span></li>
+              <li><span class="ingredient-name">Fresh lemon juice</span><span class="ingredient-qty">25 ml</span></li>
+              <li><span class="ingredient-name">Simple syrup</span><span class="ingredient-qty">20 ml</span></li>
+              <li><span class="ingredient-name">Cola</span><span class="ingredient-qty">top up</span></li>
+              <li><span class="ingredient-name">Lemon wedge</span><span class="ingredient-qty">1</span></li>
+              <li><span class="ingredient-name">Vodka</span><span class="ingredient-qty">15 ml</span></li>
+              <li><span class="ingredient-name">White rum</span><span class="ingredient-qty">15 ml</span></li>
+              <li><span class="ingredient-name">Gin</span><span class="ingredient-qty">15 ml</span></li>
+              <li><span class="ingredient-name">Tequila</span><span class="ingredient-qty">15 ml</span></li>
+              <li><span class="ingredient-name">Triple sec</span><span class="ingredient-qty">15 ml</span></li>
+            </ul>
+          </div>
+          <div class="recipe-instructions">
+            <h3>Instructions</h3>
+            <ol>
+              <li>Fill a highball glass with ice cubes.</li>
+              <li>Add the lemon juice and simple syrup.</li>
+              <li>Pour in vodka, rum, gin, tequila, and triple sec.</li>
+              <li>Stir briefly to combine.</li>
+              <li>Top with a splash of cola for colour.</li>
+              <li>Garnish with a lemon wedge.</li>
+            </ol>
+            <p class="recipe-glass"><strong>Glass:</strong> Highball glass</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 07 — Margarita -->
+      <article class="recipe-card" id="margarita">
+        <span class="recipe-number">07</span>
+        <div class="recipe-header">
+          <h2 class="recipe-name">Margarita</h2>
+          <div class="recipe-meta">
+            <span class="recipe-tag">Shaken</span>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <div class="recipe-ingredients">
+            <h3>Ingredients</h3>
+            <ul>
+              <li><span class="ingredient-name">Fresh lime juice</span><span class="ingredient-qty">30 ml</span></li>
+              <li><span class="ingredient-name">Salt</span><span class="ingredient-qty">for rim</span></li>
+              <li><span class="ingredient-name">Lime wheel</span><span class="ingredient-qty">1</span></li>
+              <li><span class="ingredient-name">Tequila (blanco)</span><span class="ingredient-qty">50 ml</span></li>
+              <li><span class="ingredient-name">Triple sec</span><span class="ingredient-qty">20 ml</span></li>
+            </ul>
+          </div>
+          <div class="recipe-instructions">
+            <h3>Instructions</h3>
+            <ol>
+              <li>Rim a margarita glass with salt: moisten the rim with lime, then dip in salt.</li>
+              <li>Combine lime juice, tequila, and triple sec in a shaker with ice.</li>
+              <li>Shake vigorously for 10–15 seconds.</li>
+              <li>Strain into the prepared glass over fresh ice.</li>
+              <li>Garnish with a lime wheel.</li>
+            </ol>
+            <p class="recipe-glass"><strong>Glass:</strong> Margarita glass / Coupette</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 08 — Moscow Mule -->
+      <article class="recipe-card" id="moscow-mule">
+        <span class="recipe-number">08</span>
+        <div class="recipe-header">
+          <h2 class="recipe-name">Moscow Mule</h2>
+          <div class="recipe-meta">
+            <span class="recipe-tag">Built</span>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <div class="recipe-ingredients">
+            <h3>Ingredients</h3>
+            <ul>
+              <li><span class="ingredient-name">Ice cubes</span><span class="ingredient-qty">to fill</span></li>
+              <li><span class="ingredient-name">Fresh lime juice</span><span class="ingredient-qty">20 ml</span></li>
+              <li><span class="ingredient-name">Lime wedge</span><span class="ingredient-qty">1</span></li>
+              <li><span class="ingredient-name">Vodka</span><span class="ingredient-qty">45 ml</span></li>
+              <li><span class="ingredient-name">Ginger ale</span><span class="ingredient-qty">120 ml</span></li>
+            </ul>
+          </div>
+          <div class="recipe-instructions">
+            <h3>Instructions</h3>
+            <ol>
+              <li>Fill a copper mug (or highball glass) with ice cubes.</li>
+              <li>Squeeze the lime juice into the glass.</li>
+              <li>Pour in the vodka.</li>
+              <li>Top with ginger ale.</li>
+              <li>Stir gently to combine.</li>
+              <li>Garnish with a lime wedge.</li>
+            </ol>
+            <p class="recipe-glass"><strong>Glass:</strong> Copper mug / Highball glass</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 09 — Martini White -->
+      <article class="recipe-card" id="martini-white">
+        <span class="recipe-number">09</span>
+        <div class="recipe-header">
+          <h2 class="recipe-name">Martini White</h2>
+          <div class="recipe-meta">
+            <span class="recipe-tag">Stirred</span>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <div class="recipe-ingredients">
+            <h3>Ingredients</h3>
+            <ul>
+              <li><span class="ingredient-name">Lemon twist</span><span class="ingredient-qty">garnish</span></li>
+              <li><span class="ingredient-name">Gin (or Vodka)</span><span class="ingredient-qty">60 ml</span></li>
+              <li><span class="ingredient-name">Dry vermouth</span><span class="ingredient-qty">10 ml</span></li>
+            </ul>
+          </div>
+          <div class="recipe-instructions">
+            <h3>Instructions</h3>
+            <ol>
+              <li>Chill a martini glass in the freezer or with ice water.</li>
+              <li>Add gin (or vodka) and dry vermouth to a mixing glass filled with ice.</li>
+              <li>Stir smoothly for 20–30 seconds until thoroughly chilled.</li>
+              <li>Strain into the chilled martini glass.</li>
+              <li>Garnish with a lemon twist.</li>
+            </ol>
+            <p class="recipe-glass"><strong>Glass:</strong> Martini glass</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 10 — Mojito -->
+      <article class="recipe-card" id="mojito">
+        <span class="recipe-number">10</span>
+        <div class="recipe-header">
+          <h2 class="recipe-name">Mojito</h2>
+          <div class="recipe-meta">
+            <span class="recipe-tag">Muddled</span>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <div class="recipe-ingredients">
+            <h3>Ingredients</h3>
+            <ul>
+              <li><span class="ingredient-name">Fresh mint leaves</span><span class="ingredient-qty">8–10</span></li>
+              <li><span class="ingredient-name">White sugar</span><span class="ingredient-qty">2 tsp</span></li>
+              <li><span class="ingredient-name">Fresh lime juice</span><span class="ingredient-qty">20 ml</span></li>
+              <li><span class="ingredient-name">Crushed ice</span><span class="ingredient-qty">to fill</span></li>
+              <li><span class="ingredient-name">Soda water</span><span class="ingredient-qty">top up</span></li>
+              <li><span class="ingredient-name">White rum</span><span class="ingredient-qty">45 ml</span></li>
+            </ul>
+          </div>
+          <div class="recipe-instructions">
+            <h3>Instructions</h3>
+            <ol>
+              <li>Place mint leaves and sugar in a highball glass.</li>
+              <li>Muddle gently to release the mint oils (don't shred the leaves).</li>
+              <li>Add lime juice and stir to dissolve the sugar.</li>
+              <li>Fill the glass with crushed ice.</li>
+              <li>Pour in the white rum.</li>
+              <li>Top with soda water and stir gently.</li>
+              <li>Garnish with a mint sprig and lime wheel.</li>
+            </ol>
+            <p class="recipe-glass"><strong>Glass:</strong> Highball glass</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 11 — Piña Colada -->
+      <article class="recipe-card" id="pina-colada">
+        <span class="recipe-number">11</span>
+        <div class="recipe-header">
+          <h2 class="recipe-name">Piña Colada</h2>
+          <div class="recipe-meta">
+            <span class="recipe-tag">Blended</span>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <div class="recipe-ingredients">
+            <h3>Ingredients</h3>
+            <ul>
+              <li><span class="ingredient-name">Pineapple juice</span><span class="ingredient-qty">80 ml</span></li>
+              <li><span class="ingredient-name">Coconut syrup</span><span class="ingredient-qty">30 ml</span></li>
+              <li><span class="ingredient-name">Crushed ice</span><span class="ingredient-qty">1 cup</span></li>
+              <li><span class="ingredient-name">White rum</span><span class="ingredient-qty">50 ml</span></li>
+            </ul>
+          </div>
+          <div class="recipe-instructions">
+            <h3>Instructions</h3>
+            <ol>
+              <li>Add pineapple juice, coconut syrup, and crushed ice to a blender.</li>
+              <li>Pour in the white rum.</li>
+              <li>Blend until smooth and creamy.</li>
+              <li>Pour into a hurricane glass.</li>
+            </ol>
+            <p class="recipe-glass"><strong>Glass:</strong> Hurricane glass / Poco grande</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 12 — Piña Colada Spritz -->
+      <article class="recipe-card" id="pina-colada-spritz">
+        <span class="recipe-number">12</span>
+        <div class="recipe-header">
+          <h2 class="recipe-name">Piña Colada Spritz</h2>
+          <div class="recipe-meta">
+            <span class="recipe-tag">Spritz</span>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <div class="recipe-ingredients">
+            <h3>Ingredients</h3>
+            <ul>
+              <li><span class="ingredient-name">Ice cubes</span><span class="ingredient-qty">to fill</span></li>
+              <li><span class="ingredient-name">Pineapple juice</span><span class="ingredient-qty">40 ml</span></li>
+              <li><span class="ingredient-name">Coconut syrup</span><span class="ingredient-qty">20 ml</span></li>
+              <li><span class="ingredient-name">White rum</span><span class="ingredient-qty">40 ml</span></li>
+              <li><span class="ingredient-name">Prosecco</span><span class="ingredient-qty">60 ml</span></li>
+            </ul>
+          </div>
+          <div class="recipe-instructions">
+            <h3>Instructions</h3>
+            <ol>
+              <li>Shake pineapple juice, coconut syrup, and rum with ice.</li>
+              <li>Strain into a large wine glass filled with ice.</li>
+              <li>Top with Prosecco.</li>
+              <li>Stir gently to combine.</li>
+            </ol>
+            <p class="recipe-glass"><strong>Glass:</strong> Large wine glass / Spritz glass</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 13 — Swimming Pool -->
+      <article class="recipe-card" id="swimming-pool">
+        <span class="recipe-number">13</span>
+        <div class="recipe-header">
+          <h2 class="recipe-name">Swimming Pool</h2>
+          <div class="recipe-meta">
+            <span class="recipe-tag">Blended</span>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <div class="recipe-ingredients">
+            <h3>Ingredients</h3>
+            <ul>
+              <li><span class="ingredient-name">Pineapple juice</span><span class="ingredient-qty">60 ml</span></li>
+              <li><span class="ingredient-name">Coconut syrup</span><span class="ingredient-qty">20 ml</span></li>
+              <li><span class="ingredient-name">Heavy cream</span><span class="ingredient-qty">20 ml</span></li>
+              <li><span class="ingredient-name">Crushed ice</span><span class="ingredient-qty">1 cup</span></li>
+              <li><span class="ingredient-name">Vodka</span><span class="ingredient-qty">30 ml</span></li>
+              <li><span class="ingredient-name">White rum</span><span class="ingredient-qty">30 ml</span></li>
+              <li><span class="ingredient-name">Blue curaçao</span><span class="ingredient-qty">20 ml</span></li>
+            </ul>
+          </div>
+          <div class="recipe-instructions">
+            <h3>Instructions</h3>
+            <ol>
+              <li>Add pineapple juice, coconut syrup, heavy cream, and crushed ice to a blender.</li>
+              <li>Pour in the vodka and white rum.</li>
+              <li>Blend until smooth.</li>
+              <li>Pour into a hurricane glass.</li>
+              <li>Gently pour blue curaçao over the top — it will sink and create the "pool" effect.</li>
+            </ol>
+            <p class="recipe-glass"><strong>Glass:</strong> Hurricane glass / Poco grande</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 14 — Whiskey Sour -->
+      <article class="recipe-card" id="whiskey-sour">
+        <span class="recipe-number">14</span>
+        <div class="recipe-header">
+          <h2 class="recipe-name">Whiskey Sour</h2>
+          <div class="recipe-meta">
+            <span class="recipe-tag">Shaken</span>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <div class="recipe-ingredients">
+            <h3>Ingredients</h3>
+            <ul>
+              <li><span class="ingredient-name">Fresh lemon juice</span><span class="ingredient-qty">30 ml</span></li>
+              <li><span class="ingredient-name">Simple syrup</span><span class="ingredient-qty">15 ml</span></li>
+              <li><span class="ingredient-name">Orange wedge</span><span class="ingredient-qty">1</span></li>
+              <li><span class="ingredient-name">Bourbon whiskey</span><span class="ingredient-qty">45 ml</span></li>
+            </ul>
+          </div>
+          <div class="recipe-instructions">
+            <h3>Instructions</h3>
+            <ol>
+              <li>Add lemon juice, simple syrup, and bourbon into a shaker with ice.</li>
+              <li>Shake vigorously for 10–15 seconds.</li>
+              <li>Strain into an old-fashioned glass over a large ice cube.</li>
+              <li>Garnish with an orange wedge.</li>
+            </ol>
+            <p class="recipe-glass"><strong>Glass:</strong> Old-fashioned / Rocks glass</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 18 — Radler -->
+      <article class="recipe-card" id="radler">
+        <span class="recipe-number">18</span>
+        <div class="recipe-header">
+          <h2 class="recipe-name">Radler</h2>
+          <div class="recipe-meta">
+            <span class="recipe-tag beer">Beer-Based</span>
+            <span class="recipe-tag">Built</span>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <div class="recipe-ingredients">
+            <h3>Ingredients</h3>
+            <ul>
+              <li><span class="ingredient-name">Lemon soda (or lemonade)</span><span class="ingredient-qty">250 ml</span></li>
+              <li><span class="ingredient-name">Lemon wedge</span><span class="ingredient-qty">1</span></li>
+              <li><span class="ingredient-name">Lager beer</span><span class="ingredient-qty">250 ml</span></li>
+            </ul>
+          </div>
+          <div class="recipe-instructions">
+            <h3>Instructions</h3>
+            <ol>
+              <li>Pour the lemon soda into a chilled pint glass.</li>
+              <li>Slowly pour the lager on top at an angle.</li>
+              <li>Stir gently once to combine.</li>
+              <li>Garnish with a lemon wedge.</li>
+            </ol>
+            <p class="recipe-glass"><strong>Glass:</strong> Pint glass / Beer glass</p>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /recipe-grid -->
+
+    <!-- ═══ MOCKTAILS ═══ -->
+    <div class="section-header" style="page-break-before: always;">
+      <h2>Mocktails</h2>
+      <p>Alcohol-free alternatives</p>
+    </div>
+
+    <div class="recipe-grid">
+
+      <!-- 15 — Piña Colada Virgin -->
+      <article class="recipe-card" id="pina-colada-virgin">
+        <span class="recipe-number">15</span>
+        <div class="recipe-header">
+          <h2 class="recipe-name">Piña Colada Virgin</h2>
+          <div class="recipe-meta">
+            <span class="recipe-tag mocktail">Mocktail</span>
+            <span class="recipe-tag">Blended</span>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <div class="recipe-ingredients">
+            <h3>Ingredients</h3>
+            <ul>
+              <li><span class="ingredient-name">Pineapple juice</span><span class="ingredient-qty">120 ml</span></li>
+              <li><span class="ingredient-name">Coconut syrup</span><span class="ingredient-qty">30 ml</span></li>
+              <li><span class="ingredient-name">Crushed ice</span><span class="ingredient-qty">1 cup</span></li>
+            </ul>
+          </div>
+          <div class="recipe-instructions">
+            <h3>Instructions</h3>
+            <ol>
+              <li>Combine pineapple juice, coconut syrup, and crushed ice in a blender.</li>
+              <li>Blend until smooth and creamy.</li>
+              <li>Pour into a hurricane glass.</li>
+            </ol>
+            <p class="recipe-glass"><strong>Glass:</strong> Hurricane glass / Poco grande</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 16 — Shirley Temple -->
+      <article class="recipe-card" id="shirley-temple">
+        <span class="recipe-number">16</span>
+        <div class="recipe-header">
+          <h2 class="recipe-name">Shirley Temple</h2>
+          <div class="recipe-meta">
+            <span class="recipe-tag mocktail">Mocktail</span>
+            <span class="recipe-tag">Built</span>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <div class="recipe-ingredients">
+            <h3>Ingredients</h3>
+            <ul>
+              <li><span class="ingredient-name">Ice cubes</span><span class="ingredient-qty">to fill</span></li>
+              <li><span class="ingredient-name">Grenadine syrup</span><span class="ingredient-qty">20 ml</span></li>
+              <li><span class="ingredient-name">Fresh orange juice</span><span class="ingredient-qty">splash</span></li>
+              <li><span class="ingredient-name">Ginger ale or lemon-lime soda</span><span class="ingredient-qty">180 ml</span></li>
+            </ul>
+          </div>
+          <div class="recipe-instructions">
+            <h3>Instructions</h3>
+            <ol>
+              <li>Fill a highball glass with ice cubes.</li>
+              <li>Add grenadine syrup and a splash of orange juice.</li>
+              <li>Top with ginger ale (or lemon-lime soda).</li>
+              <li>Stir gently to combine.</li>
+            </ol>
+            <p class="recipe-glass"><strong>Glass:</strong> Highball glass</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 17 — Virgin Mojito -->
+      <article class="recipe-card" id="virgin-mojito">
+        <span class="recipe-number">17</span>
+        <div class="recipe-header">
+          <h2 class="recipe-name">Virgin Mojito</h2>
+          <div class="recipe-meta">
+            <span class="recipe-tag mocktail">Mocktail</span>
+            <span class="recipe-tag">Muddled</span>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <div class="recipe-ingredients">
+            <h3>Ingredients</h3>
+            <ul>
+              <li><span class="ingredient-name">Fresh mint leaves</span><span class="ingredient-qty">8–10</span></li>
+              <li><span class="ingredient-name">White sugar</span><span class="ingredient-qty">2 tsp</span></li>
+              <li><span class="ingredient-name">Fresh lime juice</span><span class="ingredient-qty">30 ml</span></li>
+              <li><span class="ingredient-name">Crushed ice</span><span class="ingredient-qty">to fill</span></li>
+              <li><span class="ingredient-name">Soda water</span><span class="ingredient-qty">top up</span></li>
+            </ul>
+          </div>
+          <div class="recipe-instructions">
+            <h3>Instructions</h3>
+            <ol>
+              <li>Place mint leaves and sugar in a highball glass.</li>
+              <li>Muddle gently to release the mint oils.</li>
+              <li>Add lime juice and stir to dissolve the sugar.</li>
+              <li>Fill the glass with crushed ice.</li>
+              <li>Top with soda water and stir gently.</li>
+              <li>Garnish with a mint sprig and lime wheel.</li>
+            </ol>
+            <p class="recipe-glass"><strong>Glass:</strong> Highball glass</p>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /recipe-grid -->
+
+    <!-- ——— FOOTER ——— -->
+    <div class="footer">
+      <p>"A good cocktail is a symphony in a glass."</p>
+      <div class="footer-ornament">✦ ✦ ✦</div>
+    </div>
+
+  </div><!-- /container -->
+
+</body>
+</html>
