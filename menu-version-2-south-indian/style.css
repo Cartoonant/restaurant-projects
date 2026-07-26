@@ -1266,3 +1266,175 @@ rong { color: var(--gold-light); font-weight: 600; }
   padding: 2px 5px;
   margin-right: 2px;
 }
+
+/* ══════════════════════════════
+   PRINT STYLES — V2 Dark Theme
+   Preserves the premium dark look for PDF export
+══════════════════════════════ */
+@media print {
+  /* ── Page setup ── */
+  @page {
+    margin: 1.2cm 1.4cm;
+    size: A4;
+  }
+
+  /* Force all colors, backgrounds, gradients to print exactly */
+  * {
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  html { font-size: 10pt; }
+
+  /* ── Body: keep the dark background ── */
+  body {
+    background: #0F0E0C !important;
+    background-image:
+      radial-gradient(ellipse at 20% 0%,  rgba(198,93,62,0.05)  0%, transparent 55%),
+      radial-gradient(ellipse at 80% 100%, rgba(27,67,50,0.07)   0%, transparent 55%) !important;
+    color: #F5F0E8 !important;
+  }
+
+  /* ── Page wrap ── */
+  .page-wrap {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  /* ── Accent bars ── */
+  .accent-bar,
+  .accent-bar-bottom {
+    height: 4px !important;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      #C65D3E 15%,
+      #C9A84C 35%,
+      #1B4332 50%,
+      #C9A84C 65%,
+      #C65D3E 85%,
+      transparent 100%
+    ) !important;
+    opacity: 0.75 !important;
+  }
+
+  /* ── Header ── */
+  .site-header {
+    background: transparent !important;
+    padding-top: 1.2rem !important;
+  }
+  .brand-name  { color: #F5F0E8 !important; }
+  .brand-sub   { color: #C4BAA8 !important; }
+  .restaurant-tagline { color: #8A7E6E !important; }
+
+  /* ── Legend bar ── */
+  .legend-bar {
+    background: #1A1814 !important;
+    border-color: rgba(201,168,76,0.25) !important;
+    box-shadow: none !important;
+    position: static !important;
+    bottom: auto !important;
+    margin: 0.6rem auto 1rem !important;
+    display: inline-block !important;
+  }
+  .legend-item,
+  .legend-label,
+  .legend-sep { color: rgba(255,255,255,0.75) !important; }
+
+  /* ── Section & card backgrounds ── */
+  .menu-section  { background: transparent !important; }
+  .dish-hero     { background: #1A1814 !important; border-color: rgba(201,168,76,0.15) !important; }
+  .dish-row      { border-bottom-color: rgba(201,168,76,0.1) !important; }
+  .sec-note      { background: rgba(198,93,62,0.1) !important; border-left-color: #C65D3E !important; color: #E8926F !important; }
+
+  /* ── Thaali columns ── */
+  .thaali-column { background: #1A1814 !important; border-color: rgba(201,168,76,0.2) !important; }
+  .thaali-cat-vg { background: rgba(45,106,79,0.3)  !important; color: #74C69D !important; }
+  .thaali-cat-v  { background: rgba(45,106,79,0.2)  !important; color: #74C69D !important; }
+  .thaali-cat-nv { background: rgba(198,93,62,0.2)  !important; color: #E8926F !important; }
+
+  /* ── Lunch section ── */
+  .lunch-section { background: rgba(198,93,62,0.08) !important; border-color: rgba(198,93,62,0.2) !important; }
+  .lunch-card    { background: #1A1814 !important; }
+
+  /* ── Biryani / special sections ── */
+  .biryani-section { background: rgba(201,168,76,0.05) !important; }
+
+  /* ── Kulfi cards ── */
+  .kulfi-flavor-card {
+    background: #1A1814 !important;
+    box-shadow: none !important;
+  }
+  .kulfi-card { background: rgba(201,168,76,0.08) !important; }
+
+  /* ── Badges ── */
+  .bdg-v  { background: rgba(45,106,79,0.3)  !important; color: #74C69D !important; border-color: rgba(64,145,108,0.5) !important; }
+  .bdg-vg { background: rgba(27,67,50,0.4)   !important; color: #74C69D !important; border-color: rgba(45,106,79,0.6)  !important; }
+  .bdg-a  { background: rgba(198,93,62,0.2)  !important; color: #E8926F !important; border-color: rgba(198,93,62,0.5)  !important; }
+
+  /* ── Sub-labels ── */
+  .sub-label { color: #C65D3E !important; border-left-color: rgba(198,93,62,0.3) !important; }
+
+  /* ── Schedule banner ── */
+  .schedule-banner {
+    background: #1A1814 !important;
+    border-color: rgba(201,168,76,0.25) !important;
+  }
+
+  /* ── Text colors ── */
+  .dish-name    { color: #F5F0E8 !important; }
+  .dish-price   { color: #C9A84C !important; }
+  .dish-en      { color: #C4BAA8 !important; }
+  .dish-de      { color: #8A7E6E !important; }
+  .sec-title    { color: #F5F0E8 !important; }
+  .sec-num      { color: #C9A84C !important; }
+
+  /* ── Footer ── */
+  .site-footer  { background: #0F0E0C !important; }
+  .footer-line  { color: rgba(255,255,255,0.4) !important; }
+  .footer-brand { color: #C9A84C !important; }
+
+  /* ── Photos ── */
+  .dish-photo      { width: 110px !important; height: 85px !important; object-fit: cover !important; }
+  .thaali-col-photo img { object-fit: cover !important; }
+  .kulfi-hero-img  { object-fit: cover !important; }
+
+  /* ── Freeze hover / transitions ── */
+  .dish-row:hover,
+  .dish-hero:hover,
+  .kulfi-card:hover,
+  .kulfi-flavor-card:hover,
+  .bdg:hover {
+    background: inherit !important;
+    transform: none !important;
+    box-shadow: inherit !important;
+  }
+
+  /* ── Grids: keep multi-col layout for compact print ── */
+  .dish-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0 1.2rem !important;
+  }
+  .thaali-grid {
+    grid-template-columns: 1fr 1fr 1fr !important;
+    gap: 0.5rem !important;
+  }
+  .kulfi-flavor-grid {
+    grid-template-columns: repeat(5, 1fr) !important;
+  }
+  .sides-columns {
+    flex-direction: row !important;
+  }
+  .drink-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .drinks-columns {
+    grid-template-columns: 1fr 2px 1fr !important;
+  }
+
+  /* ── Page-break helpers ── */
+  .menu-section { page-break-inside: avoid !important; }
+  .dish-hero    { page-break-inside: avoid !important; }
+  .thaali-grid  { page-break-inside: avoid !important; }
+  h2.sec-title  { page-break-after: avoid !important; }
+}
