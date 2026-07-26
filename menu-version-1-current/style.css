@@ -917,7 +917,7 @@ img { display: block; max-width: 100%; height: auto; }
     page-break-before: always !important;
     break-after: avoid !important;
     page-break-after: avoid !important;
-    padding-top: 2rem !important;          /* match pages 2 & 3 top margin */
+    padding-top: 4.5rem !important;   /* mirrors menu-main(3.2rem) + sec(1.4rem) = Appetizers top gap */
   }
 
   /* Desserts follows immediately on the same page as Sides */
@@ -932,7 +932,7 @@ img { display: block; max-width: 100%; height: auto; }
   #drinks {
     break-before: page !important;
     page-break-before: always !important;
-    padding-top: 2rem !important;          /* match pages 2 & 3 top margin */
+    padding-top: 4.5rem !important;   /* mirrors menu-main(3.2rem) + sec(1.4rem) = Appetizers top gap */
   }
 
   /* ─────────────────────────────────────
@@ -1001,12 +1001,14 @@ img { display: block; max-width: 100%; height: auto; }
     ) !important;
   }
 
-  /* ── Header: compact for print to leave room for Lunch on page 1 ── */
+  /* ── Header: compact for print + rounded corners ── */
   .site-header {
     background: #1E1A16 !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
-    padding: 0.9rem 1.4rem 0 !important;   /* tighter top padding */
+    padding: 0.9rem 1.4rem 0 !important;
+    border-radius: 12px !important;   /* soft rounded corners on the dark banner */
+    overflow: hidden !important;      /* keeps children inside the radius */
   }
   .header-inner {
     gap: 0.5rem !important;
@@ -1110,7 +1112,7 @@ img { display: block; max-width: 100%; height: auto; }
   #drinks .sub-label:last-of-type {
     break-before: page !important;
     page-break-before: always !important;
-    padding-top: 2rem !important;          /* match pages 2 & 3 top margin */
+    padding-top: 4.5rem !important;   /* mirrors menu-main(3.2rem) + sec(1.4rem) = Appetizers top gap */
   }
   /* Target the cocktails sub-label specifically (it immediately precedes .drink-grid) */
   #drinks .drink-grid {
