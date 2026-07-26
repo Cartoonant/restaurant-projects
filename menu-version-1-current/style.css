@@ -1073,180 +1073,55 @@ img { display: block; max-width: 100%; height: auto; }
   }
 
   /* ── Other grids ── */
-  .thaali-grid     { grid-template-columns: 1fr 1fr 1fr !important; gap: 0.5rem !important; }
+  .thaali-grid       { grid-template-columns: 1fr 1fr 1fr !important; gap: 0.5rem !important; }
   .kulfi-flavor-grid { grid-template-columns: repeat(5, 1fr) !important; }
-  .sides-columns   { flex-direction: row !important; }
-  .drink-grid      { grid-template-columns: 1fr 1fr !important; }
-  .drinks-columns  { grid-template-columns: 1fr 2px 1fr !important; }
+  .sides-columns     { flex-direction: row !important; }
+  .drink-grid        { grid-template-columns: 1fr 1fr !important; }
+  .drinks-columns    { grid-template-columns: 1fr 2px 1fr !important; }
+
+  /* ─────────────────────────────────────
+     6. DRINKS — no cuts, cocktails on new page
+  ───────────────────────────────────────*/
+
+  /* Prevent any drink block from being split across pages */
+  #drinks .drinks-columns,
+  #drinks .drink-item-list,
+  #drinks .drink-grid,
+  #drinks .drink-item  { break-inside: avoid !important; page-break-inside: avoid !important; }
+
+  /* Cocktails sub-label + grid: start at the top of the next page */
+  #drinks .sub-label:last-of-type {
+    break-before: page !important;
+    page-break-before: always !important;
+    padding-top: 0.4rem !important;
+  }
+  /* Target the cocktails sub-label specifically (it immediately precedes .drink-grid) */
+  #drinks .drink-grid {
+    break-before: avoid !important;
+    page-break-before: avoid !important;
+  }
+
+  /* ─────────────────────────────────────
+     7. MAIN DISHES — breathing room at page top
+     Kodi Kura & Pepper Chicken start this page;
+     add generous top padding so they're not cramped.
+  ───────────────────────────────────────*/
+  #mains {
+    padding-top: 2rem !important;
+  }
+  #mains .sec-head {
+    margin-bottom: 1.6rem !important;
+  }
+
+  /* ─────────────────────────────────────
+     8. HIDE EVERYTHING AFTER "drink responsibly"
+     i.e. footer + bottom accent bar
+  ───────────────────────────────────────*/
+  .site-footer         { display: none !important; }
+  .accent-bar-bottom   { display: none !important; }
 }
 
-  /* Force all color printing */
-  * {
-    print-color-adjust: exact !important;
-    -webkit-print-color-adjust: exact !important;
-  }
 
-  html { font-size: 10pt; }
-
-  body {
-    background: #FDFAF6 !important;
-    color: #3A3128 !important;
-  }
-
-  /* ── Page wrap ── */
-  .page-wrap {
-    box-shadow: none !important;
-    max-width: 100% !important;
-    padding: 0 !important;
-  }
-
-  /* ── Accent bar ── */
-  .accent-bar,
-  .accent-bar-bottom {
-    height: 5px !important;
-    background: linear-gradient(90deg,
-      #9E3D1E 0%, #C85C38 25%, #D4A843 50%, #C85C38 75%, #9E3D1E 100%
-    ) !important;
-  }
-
-  /* ── Header: keep dark exactly as on screen ── */
-  .site-header {
-    background: #1E1A16 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding: 1.6rem 1.4rem 0 !important;
-  }
-  .brand-name  { color: #FFFFFF !important; }
-  .brand-sub   { color: #9A8E84 !important; }
-  .logo-img    { border-color: rgba(212,168,67,0.5) !important; }
-
-  /* ── Legend bar ── */
-  .legend-bar {
-    background: #3A3530 !important;
-    border-color: rgba(212,168,67,0.2) !important;
-    box-shadow: none !important;
-    position: static !important;
-    bottom: auto !important;
-    margin: 0.6rem auto 1rem !important;
-    display: inline-block !important;
-  }
-  .legend-item,
-  .legend-label,
-  .legend-sep { color: rgba(255,255,255,0.75) !important; }
-
-  /* ── Schedule banner ── */
-  .schedule-banner {
-    background: linear-gradient(135deg, #1E1A16 0%, #2E2924 100%) !important;
-    border-color: rgba(184,137,42,0.3) !important;
-  }
-
-  /* ── Section backgrounds ── */
-  .lunch-section {
-    background: #F5E6DF !important;
-    border-color: rgba(200,92,56,0.15) !important;
-  }
-  .biryani-section {
-    background: #FBF6EE !important;
-  }
-
-  /* ── Cards ── */
-  .lunch-card {
-    background: #FFFFFF !important;
-    border-color: rgba(200,92,56,0.15) !important;
-  }
-  .thaali-column {
-    background: #FFFFFF !important;
-    border-color: rgba(184,137,42,0.2) !important;
-  }
-  .dish-hero {
-    background: #F8F4EF !important;
-    border-color: rgba(184,137,42,0.2) !important;
-    page-break-inside: avoid !important;
-  }
-  .kulfi-flavor-card {
-    background: #FFFFFF !important;
-    box-shadow: none !important;
-  }
-  .kulfi-card {
-    background: #FBF3E2 !important;
-    border-color: rgba(184,137,42,0.22) !important;
-  }
-
-  /* ── Thaali category labels ── */
-  .thaali-cat-vg { background: #EAF5EC !important; color: #2E7D32 !important; }
-  .thaali-cat-v  { background: #E8F5E9 !important; color: #1B5E20 !important; }
-  .thaali-cat-nv { background: #FBE9E7 !important; color: #BF360C !important; }
-
-  /* ── Badges ── */
-  .bdg-v  { background: #EAF5EC !important; color: #2E7D32 !important; border-color: #A5D6A7 !important; }
-  .bdg-vg { background: #E8F5E9 !important; color: #1B5E20 !important; border-color: #81C784 !important; }
-  .bdg-a  { background: #FFF3E0 !important; color: #BF6000 !important; border-color: #FFB74D !important; }
-
-  /* ── Sub-label ── */
-  .sub-label { color: #C85C38 !important; border-left-color: #F5E6DF !important; }
-  .sec-note  { background: #F5E6DF !important; border-left-color: #C85C38 !important; color: #9E3D1E !important; }
-
-  /* ── Footer: keep dark ── */
-  .site-footer {
-    background: #1E1A16 !important;
-    padding: 1rem 1.4rem !important;
-  }
-  .footer-line  { color: rgba(255,255,255,0.45) !important; }
-  .footer-brand { color: #D4A843 !important; }
-
-  /* ── Photos ── */
-  .dish-photo {
-    width: 110px !important;
-    height: 85px !important;
-    object-fit: cover !important;
-  }
-  .thaali-col-photo img { object-fit: cover !important; }
-  .kulfi-hero-img { object-fit: cover !important; }
-
-  /* ── Freeze all hover / transition states ── */
-  .dish-row:hover,
-  .dish-hero:hover,
-  .kulfi-card:hover,
-  .kulfi-flavor-card:hover,
-  .bdg:hover {
-    background: inherit !important;
-    transform: none !important;
-    box-shadow: inherit !important;
-    padding-left: inherit !important;
-    padding-right: inherit !important;
-  }
-
-  /* ── Grids: keep 2-col for compact print ── */
-  .dish-grid {
-    grid-template-columns: 1fr 1fr !important;
-    gap: 0 1.2rem !important;
-  }
-  .thaali-grid {
-    grid-template-columns: 1fr 1fr 1fr !important;
-    gap: 0.5rem !important;
-  }
-  .kulfi-flavor-grid {
-    grid-template-columns: repeat(5, 1fr) !important;
-  }
-  .sides-columns {
-    flex-direction: row !important;
-  }
-  .drink-grid {
-    grid-template-columns: 1fr 1fr !important;
-  }
-  .drinks-columns {
-    grid-template-columns: 1fr 2px 1fr !important;
-  }
-
-  /* ── Page-break helpers ── */
-  .menu-section { page-break-inside: avoid !important; }
-  .dish-hero    { page-break-inside: avoid !important; }
-  .thaali-grid  { page-break-inside: avoid !important; }
-  h2.sec-title  { page-break-after: avoid !important; }
-
-  /* ── Remove screen-only decorations ── */
-  .page-wrap { box-shadow: none !important; }
-}
 
 /* ══════════════════════════════
    MOBILE TWEAKS
