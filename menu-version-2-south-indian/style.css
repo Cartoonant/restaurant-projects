@@ -1272,13 +1272,26 @@ rong { color: var(--gold-light); font-weight: 600; }
    Preserves the premium dark look for PDF export
 ══════════════════════════════ */
 @media print {
-  /* ── Page setup ── */
+
+  /* ─────────────────────────────────────
+     1. PAGE SETUP — full bleed, no white bands
+  ───────────────────────────────────────*/
   @page {
-    margin: 1.2cm 1.4cm;
+    margin: 0;
     size: A4;
   }
 
-  /* Force all colors, backgrounds, gradients to print exactly */
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .page-wrap {
+    padding: 1.2cm 1.4cm !important;
+    box-shadow: none !important;
+    max-width: 100% !important;
+  }
+
+  /* Force all colors to print */
   * {
     print-color-adjust: exact !important;
     -webkit-print-color-adjust: exact !important;
@@ -1295,39 +1308,128 @@ rong { color: var(--gold-light); font-weight: 600; }
     color: #F5F0E8 !important;
   }
 
-  /* ── Page wrap ── */
-  .page-wrap {
-    max-width: 100% !important;
-    padding: 0 !important;
+  /* ─────────────────────────────────────
+     2. PAGE BREAKS — identical to V1
+  ───────────────────────────────────────*/
+
+  #lunch {
+    break-before: avoid !important;
+    page-break-before: avoid !important;
   }
 
-  /* ── Accent bars ── */
+  #appetizers {
+    break-after: page !important;
+    page-break-after: always !important;
+  }
+
+  #biryani {
+    break-before: auto !important;
+    page-break-before: auto !important;
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+  #specials {
+    break-before: avoid !important;
+    page-break-before: avoid !important;
+  }
+
+  #mains {
+    break-before: page !important;
+    page-break-before: always !important;
+    break-after: page !important;
+    page-break-after: always !important;
+  }
+
+  #sides {
+    break-before: page !important;
+    page-break-before: always !important;
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  #desserts {
+    break-before: avoid !important;
+    page-break-before: avoid !important;
+    break-after: page !important;
+    page-break-after: always !important;
+  }
+
+  #drinks {
+    break-before: page !important;
+    page-break-before: always !important;
+  }
+
+  /* ─────────────────────────────────────
+     3. NO SPLITTING — never cut elements mid-page
+  ───────────────────────────────────────*/
+  .menu-section      { break-inside: avoid !important; page-break-inside: avoid !important; }
+  .dish-hero         { break-inside: avoid !important; page-break-inside: avoid !important; }
+  .dish-row          { break-inside: avoid !important; page-break-inside: avoid !important; }
+  .thaali-grid       { break-inside: avoid !important; page-break-inside: avoid !important; }
+  .thaali-column     { break-inside: avoid !important; page-break-inside: avoid !important; }
+  .kulfi-flavor-card { break-inside: avoid !important; page-break-inside: avoid !important; }
+  .sides-columns     { break-inside: avoid !important; page-break-inside: avoid !important; }
+  h2.sec-title       { break-after: avoid !important;  page-break-after: avoid !important;  }
+  .sec-head          { break-after: avoid !important;  page-break-after: avoid !important;  }
+  .sub-label         { break-after: avoid !important;  page-break-after: avoid !important;  }
+
+  /* ─────────────────────────────────────
+     4. VERTICAL FILL — content spreads evenly
+  ───────────────────────────────────────*/
+  .menu-section {
+    padding-top: 1.4rem !important;
+    padding-bottom: 1.4rem !important;
+  }
+  .dish-row {
+    padding-top: 0.65rem !important;
+    padding-bottom: 0.65rem !important;
+  }
+  .dish-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.1rem 1.2rem !important;
+  }
+  #mains .dish-row {
+    padding-top: 0.85rem !important;
+    padding-bottom: 0.85rem !important;
+  }
+  #mains .sub-label {
+    margin-top: 1.4rem !important;
+    margin-bottom: 0.9rem !important;
+  }
+  #sides .dish-row,
+  #desserts .dish-row {
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+  }
+
+  /* ─────────────────────────────────────
+     5. COLORS & BACKGROUNDS — V2 dark theme
+  ───────────────────────────────────────*/
+
   .accent-bar,
   .accent-bar-bottom {
     height: 4px !important;
     background: linear-gradient(
       90deg,
-      transparent 0%,
-      #C65D3E 15%,
-      #C9A84C 35%,
-      #1B4332 50%,
-      #C9A84C 65%,
-      #C65D3E 85%,
-      transparent 100%
+      transparent 0%, #C65D3E 15%, #C9A84C 35%,
+      #1B4332 50%, #C9A84C 65%, #C65D3E 85%, transparent 100%
     ) !important;
     opacity: 0.75 !important;
   }
 
-  /* ── Header ── */
   .site-header {
     background: transparent !important;
-    padding-top: 1.2rem !important;
+    padding: 0.9rem 1.4rem 0 !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
   }
-  .brand-name  { color: #F5F0E8 !important; }
+  .header-inner { gap: 0.5rem !important; padding-bottom: 1rem !important; }
+  .logo-img { height: 68px !important; }
+  .brand-name  { color: #F5F0E8 !important; font-size: 2rem !important; }
   .brand-sub   { color: #C4BAA8 !important; }
   .restaurant-tagline { color: #8A7E6E !important; }
+  .legend-bar  { padding: 0.3rem 1rem !important; margin: 0.4rem auto 0.6rem !important; }
 
-  /* ── Legend bar ── */
   .legend-bar {
     background: #1A1814 !important;
     border-color: rgba(201,168,76,0.25) !important;
@@ -1337,104 +1439,97 @@ rong { color: var(--gold-light); font-weight: 600; }
     margin: 0.6rem auto 1rem !important;
     display: inline-block !important;
   }
-  .legend-item,
-  .legend-label,
-  .legend-sep { color: rgba(255,255,255,0.75) !important; }
+  .legend-item, .legend-label, .legend-sep { color: rgba(255,255,255,0.75) !important; }
 
-  /* ── Section & card backgrounds ── */
-  .menu-section  { background: transparent !important; }
-  .dish-hero     { background: #1A1814 !important; border-color: rgba(201,168,76,0.15) !important; }
-  .dish-row      { border-bottom-color: rgba(201,168,76,0.1) !important; }
-  .sec-note      { background: rgba(198,93,62,0.1) !important; border-left-color: #C65D3E !important; color: #E8926F !important; }
+  .schedule-banner { background: #1A1814 !important; border-color: rgba(201,168,76,0.25) !important; }
 
-  /* ── Thaali columns ── */
+  .menu-section    { background: transparent !important; }
+  .lunch-section   { background: rgba(198,93,62,0.08) !important; border-color: rgba(198,93,62,0.2) !important; }
+  .biryani-section { background: rgba(201,168,76,0.05) !important; }
+  .lunch-card      { background: #1A1814 !important; }
+  .dish-hero       { background: #1A1814 !important; border-color: rgba(201,168,76,0.15) !important; }
+  .dish-row        { border-bottom-color: rgba(201,168,76,0.1) !important; }
+  .sec-note        { background: rgba(198,93,62,0.1) !important; border-left-color: #C65D3E !important; color: #E8926F !important; }
+
   .thaali-column { background: #1A1814 !important; border-color: rgba(201,168,76,0.2) !important; }
   .thaali-cat-vg { background: rgba(45,106,79,0.3)  !important; color: #74C69D !important; }
   .thaali-cat-v  { background: rgba(45,106,79,0.2)  !important; color: #74C69D !important; }
   .thaali-cat-nv { background: rgba(198,93,62,0.2)  !important; color: #E8926F !important; }
 
-  /* ── Lunch section ── */
-  .lunch-section { background: rgba(198,93,62,0.08) !important; border-color: rgba(198,93,62,0.2) !important; }
-  .lunch-card    { background: #1A1814 !important; }
+  .kulfi-flavor-card { background: #1A1814 !important; box-shadow: none !important; }
+  .kulfi-card        { background: rgba(201,168,76,0.08) !important; }
 
-  /* ── Biryani / special sections ── */
-  .biryani-section { background: rgba(201,168,76,0.05) !important; }
-
-  /* ── Kulfi cards ── */
-  .kulfi-flavor-card {
-    background: #1A1814 !important;
-    box-shadow: none !important;
-  }
-  .kulfi-card { background: rgba(201,168,76,0.08) !important; }
-
-  /* ── Badges ── */
   .bdg-v  { background: rgba(45,106,79,0.3)  !important; color: #74C69D !important; border-color: rgba(64,145,108,0.5) !important; }
   .bdg-vg { background: rgba(27,67,50,0.4)   !important; color: #74C69D !important; border-color: rgba(45,106,79,0.6)  !important; }
   .bdg-a  { background: rgba(198,93,62,0.2)  !important; color: #E8926F !important; border-color: rgba(198,93,62,0.5)  !important; }
 
-  /* ── Sub-labels ── */
   .sub-label { color: #C65D3E !important; border-left-color: rgba(198,93,62,0.3) !important; }
 
-  /* ── Schedule banner ── */
-  .schedule-banner {
-    background: #1A1814 !important;
-    border-color: rgba(201,168,76,0.25) !important;
-  }
+  .dish-name  { color: #F5F0E8 !important; }
+  .dish-price { color: #C9A84C !important; }
+  .dish-en    { color: #C4BAA8 !important; }
+  .dish-de    { color: #8A7E6E !important; }
+  .sec-title  { color: #F5F0E8 !important; }
+  .sec-num    { color: #C9A84C !important; }
 
-  /* ── Text colors ── */
-  .dish-name    { color: #F5F0E8 !important; }
-  .dish-price   { color: #C9A84C !important; }
-  .dish-en      { color: #C4BAA8 !important; }
-  .dish-de      { color: #8A7E6E !important; }
-  .sec-title    { color: #F5F0E8 !important; }
-  .sec-num      { color: #C9A84C !important; }
-
-  /* ── Footer ── */
   .site-footer  { background: #0F0E0C !important; }
   .footer-line  { color: rgba(255,255,255,0.4) !important; }
   .footer-brand { color: #C9A84C !important; }
 
-  /* ── Photos ── */
-  .dish-photo      { width: 110px !important; height: 85px !important; object-fit: cover !important; }
+  .dish-photo           { width: 110px !important; height: 85px !important; object-fit: cover !important; }
   .thaali-col-photo img { object-fit: cover !important; }
-  .kulfi-hero-img  { object-fit: cover !important; }
+  .kulfi-hero-img       { object-fit: cover !important; }
 
-  /* ── Freeze hover / transitions ── */
-  .dish-row:hover,
-  .dish-hero:hover,
-  .kulfi-card:hover,
-  .kulfi-flavor-card:hover,
-  .bdg:hover {
+  .dish-row:hover, .dish-hero:hover, .kulfi-card:hover,
+  .kulfi-flavor-card:hover, .bdg:hover {
     background: inherit !important;
     transform: none !important;
     box-shadow: inherit !important;
+    padding-left: inherit !important;
+    padding-right: inherit !important;
   }
 
-  /* ── Grids: keep multi-col layout for compact print ── */
-  .dish-grid {
-    grid-template-columns: 1fr 1fr !important;
-    gap: 0 1.2rem !important;
+  .thaali-grid       { grid-template-columns: 1fr 1fr 1fr !important; gap: 0.5rem !important; }
+  .kulfi-flavor-grid { grid-template-columns: repeat(5, 1fr) !important; }
+  .sides-columns     { flex-direction: row !important; }
+  .drink-grid        { grid-template-columns: 1fr 1fr !important; }
+  .drinks-columns    { grid-template-columns: 1fr 2px 1fr !important; }
+
+  /* ─────────────────────────────────────
+     6. DRINKS — no cuts, cocktails on new page
+  ───────────────────────────────────────*/
+  #drinks .drinks-columns,
+  #drinks .drink-item-list,
+  #drinks .drink-grid,
+  #drinks .drink-item { break-inside: avoid !important; page-break-inside: avoid !important; }
+
+  #drinks .sub-label:last-of-type {
+    break-before: page !important;
+    page-break-before: always !important;
+    display: block !important;
   }
-  .thaali-grid {
-    grid-template-columns: 1fr 1fr 1fr !important;
-    gap: 0.5rem !important;
-  }
-  .kulfi-flavor-grid {
-    grid-template-columns: repeat(5, 1fr) !important;
-  }
-  .sides-columns {
-    flex-direction: row !important;
-  }
-  .drink-grid {
-    grid-template-columns: 1fr 1fr !important;
-  }
-  .drinks-columns {
-    grid-template-columns: 1fr 2px 1fr !important;
+  #drinks .drink-grid {
+    break-before: avoid !important;
+    page-break-before: avoid !important;
   }
 
-  /* ── Page-break helpers ── */
-  .menu-section { page-break-inside: avoid !important; }
-  .dish-hero    { page-break-inside: avoid !important; }
-  .thaali-grid  { page-break-inside: avoid !important; }
-  h2.sec-title  { page-break-after: avoid !important; }
+  /* ─────────────────────────────────────
+     7. PRINT-ONLY SPACERS (pages 3, 6, 9)
+  ───────────────────────────────────────*/
+  .print-only-spacer {
+    display: block !important;
+    height: 60px !important;
+    width: 100% !important;
+    clear: both !important;
+  }
+
+  #mains .sec-head {
+    margin-bottom: 1.6rem !important;
+  }
+
+  /* ─────────────────────────────────────
+     8. HIDE EVERYTHING AFTER "drink responsibly"
+  ───────────────────────────────────────*/
+  .site-footer       { display: none !important; }
+  .accent-bar-bottom { display: none !important; }
 }
