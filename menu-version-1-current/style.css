@@ -879,6 +879,12 @@ img { display: block; max-width: 100%; height: auto; }
      Page 5 : Drinks (07)
   ───────────────────────────────────────*/
 
+  /* Lunch stays on page 1 — never push to next page */
+  #lunch {
+    break-before: avoid !important;
+    page-break-before: avoid !important;
+  }
+
   /* End of page 1: force new page after Appetizers */
   #appetizers {
     break-after: page !important;
@@ -911,6 +917,7 @@ img { display: block; max-width: 100%; height: auto; }
     page-break-before: always !important;
     break-after: avoid !important;
     page-break-after: avoid !important;
+    padding-top: 2rem !important;          /* match pages 2 & 3 top margin */
   }
 
   /* Desserts follows immediately on the same page as Sides */
@@ -921,10 +928,11 @@ img { display: block; max-width: 100%; height: auto; }
     page-break-after: always !important;
   }
 
-  /* Drinks: its own page */
+  /* Drinks: its own page (page 7) */
   #drinks {
     break-before: page !important;
     page-break-before: always !important;
+    padding-top: 2rem !important;          /* match pages 2 & 3 top margin */
   }
 
   /* ─────────────────────────────────────
@@ -993,16 +1001,25 @@ img { display: block; max-width: 100%; height: auto; }
     ) !important;
   }
 
-  /* ── Header: keep dark exactly as on screen ── */
+  /* ── Header: compact for print to leave room for Lunch on page 1 ── */
   .site-header {
     background: #1E1A16 !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
-    padding: 1.6rem 1.4rem 0 !important;
+    padding: 0.9rem 1.4rem 0 !important;   /* tighter top padding */
   }
-  .brand-name  { color: #FFFFFF !important; }
+  .header-inner {
+    gap: 0.5rem !important;
+    padding-bottom: 1rem !important;
+  }
+  .logo-img {
+    height: 68px !important;               /* smaller logo */
+    border-color: rgba(212,168,67,0.5) !important;
+  }
+  .brand-name  { color: #FFFFFF !important; font-size: 2rem !important; }
   .brand-sub   { color: #9A8E84 !important; }
-  .logo-img    { border-color: rgba(212,168,67,0.5) !important; }
+  /* Compact legend bar */
+  .legend-bar  { padding: 0.3rem 1rem !important; margin: 0.4rem auto 0.6rem !important; }
 
   /* ── Legend bar ── */
   .legend-bar {
@@ -1089,11 +1106,11 @@ img { display: block; max-width: 100%; height: auto; }
   #drinks .drink-grid,
   #drinks .drink-item  { break-inside: avoid !important; page-break-inside: avoid !important; }
 
-  /* Cocktails sub-label + grid: start at the top of the next page */
+  /* Cocktails sub-label + grid: start at the top of the next page (page 10) */
   #drinks .sub-label:last-of-type {
     break-before: page !important;
     page-break-before: always !important;
-    padding-top: 0.4rem !important;
+    padding-top: 2rem !important;          /* match pages 2 & 3 top margin */
   }
   /* Target the cocktails sub-label specifically (it immediately precedes .drink-grid) */
   #drinks .drink-grid {
