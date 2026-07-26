@@ -833,6 +833,11 @@ img { display: block; max-width: 100%; height: auto; }
   opacity: 0.8;
 }
 
+/* Print spacer: invisible on screen */
+.print-spacer {
+  display: none;
+}
+
 /* ══════════════════════════════
    PRINT STYLES
 ══════════════════════════════ */
@@ -1119,36 +1124,20 @@ img { display: block; max-width: 100%; height: auto; }
   }
 
   /* ─────────────────────────────────────
-     7. SECTION TOP SPACING — flush titles, targeted element spacing
-     Titles (sec-head) start at page top with 0 extra space.
-     Only the SPECIFIC elements that sit at the top of their
-     print page get individual top-margin for breathing room.
+     7. PHYSICAL PRINT SPACERS
+     HTML <div class="print-spacer"> elements are hidden on screen
+     and displayed as 60px blocks on print. Chrome cannot collapse
+     a real DOM node — this is the only reliable method.
   ───────────────────────────────────────*/
-
-  /* Reset: section heads start flush at page top */
-  #mains > .sec-head,
-  #drinks > .sec-head {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-  }
-
-  /* Page 3 — Kodi Kura: it's the 1st dish-row in the 2nd dish-grid of #mains
-     (after the Chicken sub-label + Gongura hero).
-     The sub-label "Chicken" starts this page, give IT the top space. */
-  #mains > .sub-label:nth-of-type(2) {
-    margin-top: 60px !important;
-  }
-
-  /* Page 2 (lower half) — Pepper Chicken: last dish-row in the 2nd dish-grid of #appetizers.
-     This element sits near the top of its printed page.
-     The sub-label "From the Street" starts this area. */
-  #appetizers > .sub-label.street-sublabel {
-    margin-top: 60px !important;
-  }
-
-  /* Page 9 — Cocktails: the sub-label that starts the cocktails page */
-  #drinks > .sub-label:last-of-type {
-    margin-top: 60px !important;
+  .print-spacer {
+    display: block !important;
+    height: 60px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    line-height: 0 !important;
+    font-size: 0 !important;
   }
 
   #mains .sec-head {
