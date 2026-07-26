@@ -1124,12 +1124,24 @@ img { display: block; max-width: 100%; height: auto; }
   }
 
   /* ─────────────────────────────────────
-     7. PHYSICAL PRINT SPACERS
-     HTML <div class="print-spacer"> elements are hidden on screen
-     and displayed as 60px blocks on print. Chrome cannot collapse
-     a real DOM node — this is the only reliable method.
+     7. FLUSH TOP — Main Dishes & Drinks start at page edge
   ───────────────────────────────────────*/
-  .print-spacer {
+  #mains,
+  #mains > .sec-head,
+  #drinks,
+  #drinks > .sec-head {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  /* ─────────────────────────────────────
+     8. PHYSICAL PRINT SPACERS — pages 3, 6, 9 ONLY
+     Targeted by unique IDs so nothing else is affected.
+     <div class="print-spacer" id="spacer-xxx"> in the HTML.
+  ───────────────────────────────────────*/
+  #spacer-kodi-kura,
+  #spacer-pepper-chicken,
+  #spacer-cocktails {
     display: block !important;
     height: 60px !important;
     width: 100% !important;
