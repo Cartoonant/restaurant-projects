@@ -837,11 +837,248 @@ img { display: block; max-width: 100%; height: auto; }
    PRINT STYLES
 ══════════════════════════════ */
 @media print {
-  /* ── Page setup ── */
+
+  /* ─────────────────────────────────────
+     1. PAGE SETUP — full bleed, no white bands
+  ───────────────────────────────────────*/
   @page {
-    margin: 1.2cm 1.4cm;
+    margin: 0;          /* remove all page margins so bg fills edge-to-edge */
     size: A4;
   }
+
+  /* Compensate margin removal with inner padding so text isn't clipped */
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .page-wrap {
+    padding: 1.2cm 1.4cm !important;   /* replaces the @page margin */
+    box-shadow: none !important;
+    max-width: 100% !important;
+  }
+
+  /* Force all color printing */
+  * {
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  html { font-size: 10pt; }
+
+  body {
+    background: #FDFAF6 !important;
+    color: #3A3128 !important;
+  }
+
+  /* ─────────────────────────────────────
+     2. PAGE BREAKS — 4-page layout
+     Page 1 : Header + Lunch + Appetizers (01)
+     Page 2 : Biryani (02) + Indian Specials (03)
+     Page 3 : Main Dishes (04)
+     Page 4 : Sides & Breads (05) + Desserts (06)
+     Page 5 : Drinks (07)
+  ───────────────────────────────────────*/
+
+  /* End of page 1: force new page after Appetizers */
+  #appetizers {
+    break-after: page !important;
+    page-break-after: always !important;
+  }
+
+  /* Biryani + Specials: keep on the SAME page — no break between them */
+  #biryani {
+    break-before: auto !important;
+    page-break-before: auto !important;
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+  #specials {
+    break-before: avoid !important;
+    page-break-before: avoid !important;
+  }
+
+  /* End of page 2: force new page before Main Dishes */
+  #mains {
+    break-before: page !important;
+    page-break-before: always !important;
+    break-after: page !important;
+    page-break-after: always !important;
+  }
+
+  /* Page 4: Sides & Breads starts at top of its own page */
+  #sides {
+    break-before: page !important;
+    page-break-before: always !important;
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  /* Desserts follows immediately on the same page as Sides */
+  #desserts {
+    break-before: avoid !important;
+    page-break-before: avoid !important;
+    break-after: page !important;
+    page-break-after: always !important;
+  }
+
+  /* Drinks: its own page */
+  #drinks {
+    break-before: page !important;
+    page-break-before: always !important;
+  }
+
+  /* ─────────────────────────────────────
+     3. NO SPLITTING — never cut elements mid-page
+  ───────────────────────────────────────*/
+  .menu-section      { break-inside: avoid !important; page-break-inside: avoid !important; }
+  .dish-hero         { break-inside: avoid !important; page-break-inside: avoid !important; }
+  .dish-row          { break-inside: avoid !important; page-break-inside: avoid !important; }
+  .thaali-grid       { break-inside: avoid !important; page-break-inside: avoid !important; }
+  .thaali-column     { break-inside: avoid !important; page-break-inside: avoid !important; }
+  .kulfi-flavor-card { break-inside: avoid !important; page-break-inside: avoid !important; }
+  .sides-columns     { break-inside: avoid !important; page-break-inside: avoid !important; }
+  h2.sec-title       { break-after: avoid !important;  page-break-after: avoid !important;  }
+  .sec-head          { break-after: avoid !important;  page-break-after: avoid !important;  }
+  .sub-label         { break-after: avoid !important;  page-break-after: avoid !important;  }
+
+  /* ─────────────────────────────────────
+     4. VERTICAL FILL — content spreads top→bottom on each page
+  ───────────────────────────────────────*/
+
+  /* Give each section breathing room so content distributes evenly */
+  .menu-section {
+    padding-top: 1.4rem !important;
+    padding-bottom: 1.4rem !important;
+  }
+
+  /* Dish rows: add a bit more vertical spacing between items */
+  .dish-row {
+    padding-top: 0.65rem !important;
+    padding-bottom: 0.65rem !important;
+  }
+
+  /* Stack dish-grid rows with slightly more gap */
+  .dish-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.1rem 1.2rem !important;
+  }
+
+  /* Mains page: extra spacing to help content fill the page */
+  #mains .dish-row {
+    padding-top: 0.85rem !important;
+    padding-bottom: 0.85rem !important;
+  }
+  #mains .sub-label {
+    margin-top: 1.4rem !important;
+    margin-bottom: 0.9rem !important;
+  }
+
+  /* Sides+Desserts page: generous spacing */
+  #sides .dish-row,
+  #desserts .dish-row {
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+  }
+
+  /* ─────────────────────────────────────
+     5. COLORS & BACKGROUNDS (unchanged from before)
+  ───────────────────────────────────────*/
+
+  /* ── Accent bar ── */
+  .accent-bar,
+  .accent-bar-bottom {
+    height: 5px !important;
+    background: linear-gradient(90deg,
+      #9E3D1E 0%, #C85C38 25%, #D4A843 50%, #C85C38 75%, #9E3D1E 100%
+    ) !important;
+  }
+
+  /* ── Header: keep dark exactly as on screen ── */
+  .site-header {
+    background: #1E1A16 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 1.6rem 1.4rem 0 !important;
+  }
+  .brand-name  { color: #FFFFFF !important; }
+  .brand-sub   { color: #9A8E84 !important; }
+  .logo-img    { border-color: rgba(212,168,67,0.5) !important; }
+
+  /* ── Legend bar ── */
+  .legend-bar {
+    background: #3A3530 !important;
+    border-color: rgba(212,168,67,0.2) !important;
+    box-shadow: none !important;
+    position: static !important;
+    bottom: auto !important;
+    margin: 0.6rem auto 1rem !important;
+    display: inline-block !important;
+  }
+  .legend-item,
+  .legend-label,
+  .legend-sep { color: rgba(255,255,255,0.75) !important; }
+
+  /* ── Schedule banner ── */
+  .schedule-banner {
+    background: linear-gradient(135deg, #1E1A16 0%, #2E2924 100%) !important;
+    border-color: rgba(184,137,42,0.3) !important;
+  }
+
+  /* ── Section backgrounds ── */
+  .lunch-section   { background: #F5E6DF !important; border-color: rgba(200,92,56,0.15) !important; }
+  .biryani-section { background: #FBF6EE !important; }
+
+  /* ── Cards ── */
+  .lunch-card        { background: #FFFFFF !important; border-color: rgba(200,92,56,0.15) !important; }
+  .thaali-column     { background: #FFFFFF !important; border-color: rgba(184,137,42,0.2) !important; }
+  .dish-hero         { background: #F8F4EF !important; border-color: rgba(184,137,42,0.2) !important; }
+  .kulfi-flavor-card { background: #FFFFFF !important; box-shadow: none !important; }
+  .kulfi-card        { background: #FBF3E2 !important; border-color: rgba(184,137,42,0.22) !important; }
+
+  /* ── Thaali category labels ── */
+  .thaali-cat-vg { background: #EAF5EC !important; color: #2E7D32 !important; }
+  .thaali-cat-v  { background: #E8F5E9 !important; color: #1B5E20 !important; }
+  .thaali-cat-nv { background: #FBE9E7 !important; color: #BF360C !important; }
+
+  /* ── Badges ── */
+  .bdg-v  { background: #EAF5EC !important; color: #2E7D32 !important; border-color: #A5D6A7 !important; }
+  .bdg-vg { background: #E8F5E9 !important; color: #1B5E20 !important; border-color: #81C784 !important; }
+  .bdg-a  { background: #FFF3E0 !important; color: #BF6000 !important; border-color: #FFB74D !important; }
+
+  /* ── Sub-label & notes ── */
+  .sub-label { color: #C85C38 !important; border-left-color: #F5E6DF !important; }
+  .sec-note  { background: #F5E6DF !important; border-left-color: #C85C38 !important; color: #9E3D1E !important; }
+
+  /* ── Footer: keep dark ── */
+  .site-footer  { background: #1E1A16 !important; padding: 1rem 1.4rem !important; }
+  .footer-line  { color: rgba(255,255,255,0.45) !important; }
+  .footer-brand { color: #D4A843 !important; }
+
+  /* ── Photos ── */
+  .dish-photo           { width: 110px !important; height: 85px !important; object-fit: cover !important; }
+  .thaali-col-photo img { object-fit: cover !important; }
+  .kulfi-hero-img       { object-fit: cover !important; }
+
+  /* ── Freeze hover / transition states ── */
+  .dish-row:hover,
+  .dish-hero:hover,
+  .kulfi-card:hover,
+  .kulfi-flavor-card:hover,
+  .bdg:hover {
+    background: inherit !important;
+    transform: none !important;
+    box-shadow: inherit !important;
+    padding-left: inherit !important;
+    padding-right: inherit !important;
+  }
+
+  /* ── Other grids ── */
+  .thaali-grid     { grid-template-columns: 1fr 1fr 1fr !important; gap: 0.5rem !important; }
+  .kulfi-flavor-grid { grid-template-columns: repeat(5, 1fr) !important; }
+  .sides-columns   { flex-direction: row !important; }
+  .drink-grid      { grid-template-columns: 1fr 1fr !important; }
+  .drinks-columns  { grid-template-columns: 1fr 2px 1fr !important; }
+}
 
   /* Force all color printing */
   * {
