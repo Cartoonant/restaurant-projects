@@ -928,7 +928,7 @@ img { display: block; max-width: 100%; height: auto; }
     page-break-after: always !important;
   }
 
-  /* Drinks: its own page (page 7) */
+  /* Drinks: its own page (page 6) */
   #drinks {
     break-before: page !important;
     page-break-before: always !important;
@@ -1108,7 +1108,7 @@ img { display: block; max-width: 100%; height: auto; }
   #drinks .drink-grid,
   #drinks .drink-item  { break-inside: avoid !important; page-break-inside: avoid !important; }
 
-  /* Cocktails sub-label + grid: start at the top of the next page (page 10) */
+  /* Cocktails sub-label + grid: start at the top of the next page (page 9) */
   #drinks .sub-label:last-of-type {
     break-before: page !important;
     page-break-before: always !important;
@@ -1121,12 +1121,12 @@ img { display: block; max-width: 100%; height: auto; }
   }
 
   /* ─────────────────────────────────────
-     7. MAIN DISHES — breathing room at page top
+     7. MAIN DISHES — breathing room at page top (page 3)
      Kodi Kura & Pepper Chicken start this page;
-     add generous top padding so they're not cramped.
+     match the Appetizers top gap exactly.
   ───────────────────────────────────────*/
   #mains {
-    padding-top: 2rem !important;
+    padding-top: 4.5rem !important;   /* mirrors menu-main(3.2rem) + sec(1.4rem) = Appetizers top gap */
   }
   #mains .sec-head {
     margin-bottom: 1.6rem !important;
